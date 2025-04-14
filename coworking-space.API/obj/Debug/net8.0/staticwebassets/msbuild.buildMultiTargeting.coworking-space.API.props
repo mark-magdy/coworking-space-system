@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\coworking-space.API.props" />
+</Project>
