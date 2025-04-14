@@ -2679,23 +2679,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kiro3\\.nuget\\packages\\": {},
+    "C:\\Users\\marka\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.BAL\\coworking-space.BAL.csproj",
+      "projectUniqueName": "D:\\courses\\DEPI Web\\gradProject\\coworking-space-system\\coworking-space.BAL\\coworking-space.BAL.csproj",
       "projectName": "coworking-space.BAL",
-      "projectPath": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.BAL\\coworking-space.BAL.csproj",
-      "packagesPath": "C:\\Users\\kiro3\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.BAL\\obj\\",
+      "projectPath": "D:\\courses\\DEPI Web\\gradProject\\coworking-space-system\\coworking-space.BAL\\coworking-space.BAL.csproj",
+      "packagesPath": "C:\\Users\\marka\\.nuget\\packages\\",
+      "outputPath": "D:\\courses\\DEPI Web\\gradProject\\coworking-space-system\\coworking-space.BAL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\kiro3\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\marka\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2710,8 +2710,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.DAL\\coworking-space.DAL.csproj": {
-              "projectPath": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.DAL\\coworking-space.DAL.csproj"
+            "D:\\courses\\DEPI Web\\gradProject\\coworking-space-system\\coworking-space.DAL\\coworking-space.DAL.csproj": {
+              "projectPath": "D:\\courses\\DEPI Web\\gradProject\\coworking-space-system\\coworking-space.DAL\\coworking-space.DAL.csproj"
             }
           }
         }
