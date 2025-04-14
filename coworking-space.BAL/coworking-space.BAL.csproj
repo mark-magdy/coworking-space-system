@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\coworking-space.DAL\coworking-space.DAL.csproj" />
+  </ItemGroup>
+
 </Project>
