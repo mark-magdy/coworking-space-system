@@ -35,9 +35,9 @@ namespace coworking_space.DAL.Repository.Implementations {
     }
 
     // Implementations/PurchasedItemRepository.cs
-    public class PurchasedItemRepository : GenericRepository<PurchasedItem>, IPurchasedItemRepository {
-        public PurchasedItemRepository(Context context) : base(context) { }
-    }
+    //public class PurchasedItemRepository : GenericRepository<PurchasedItem>, IPurchasedItemRepository {
+    //    public PurchasedItemRepository(Context context) : base(context) { }
+    //}
 
     // Implementations/ReservationsRepository.cs
     public class ReservationsRepository : GenericRepository<Reservations>, IReservationsRepository {
