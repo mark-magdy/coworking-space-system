@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace coworking_space.DAL.Repository.Interfaces {
     // Interfaces/IClientRepository.cs
-    public interface IClientRepository : IGenericRepository<Client> { }
 
     // Interfaces/IExpensesRepository.cs
     public interface IExpensesRepository : IGenericRepository<Expenses> { }

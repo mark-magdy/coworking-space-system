@@ -10,9 +10,7 @@ using System.Threading.Tasks;
 
 namespace coworking_space.DAL.Repository.Implementations {
     // Implementations/ClientRepository.cs
-    public class ClientRepository : GenericRepository<Client>, IClientRepository {
-        public ClientRepository(Context context) : base(context) { }
-    }
+   
 
     // Implementations/ExpensesRepository.cs
     public class ExpensesRepository : GenericRepository<Expenses>, IExpensesRepository {
