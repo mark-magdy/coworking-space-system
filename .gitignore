@@ -1,1 +1,22 @@
 .vs
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build artifacts
+bin/
+obj/
+*.dll
+*.exe
+
+# Logs
+*.log
+
+# Sensitive files
+# appsettings.json
+# appsettings.Development.json
+
+# IDE settings
+.vscode/
+*.csproj.user
