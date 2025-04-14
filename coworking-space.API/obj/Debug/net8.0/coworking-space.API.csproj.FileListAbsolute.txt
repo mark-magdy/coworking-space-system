@@ -1,0 +1,8 @@
+C:\Users\kiro3\OneDrive\Desktop\computer eng\DEPI\Co_working_Sapce\coworking-space.API\obj\Debug\net8.0\coworking-space.API.csproj.AssemblyReference.cache
+C:\Users\kiro3\OneDrive\Desktop\computer eng\DEPI\Co_working_Sapce\coworking-space.API\obj\Debug\net8.0\coworking-space.API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kiro3\OneDrive\Desktop\computer eng\DEPI\Co_working_Sapce\coworking-space.API\obj\Debug\net8.0\coworking-space.API.AssemblyInfoInputs.cache
+C:\Users\kiro3\OneDrive\Desktop\computer eng\DEPI\Co_working_Sapce\coworking-space.API\obj\Debug\net8.0\coworking-space.API.AssemblyInfo.cs
+C:\Users\kiro3\OneDrive\Desktop\computer eng\DEPI\Co_working_Sapce\coworking-space.API\obj\Debug\net8.0\coworking-space.API.csproj.CoreCompileInputs.cache
+C:\Users\kiro3\OneDrive\Desktop\computer eng\DEPI\Co_working_Sapce\coworking-space.API\obj\Debug\net8.0\coworking-space.API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\kiro3\OneDrive\Desktop\computer eng\DEPI\Co_working_Sapce\coworking-space.API\obj\Debug\net8.0\coworking-space.API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\kiro3\OneDrive\Desktop\computer eng\DEPI\Co_working_Sapce\coworking-space.API\obj\Debug\net8.0\coworking-space.API.sourcelink.json
