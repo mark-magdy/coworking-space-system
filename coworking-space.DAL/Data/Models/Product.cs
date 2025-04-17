@@ -15,7 +15,13 @@ namespace coworking_space.DAL.Data.Models
         public int Quantity { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public bool IsActive { get; set; }
+        public string? ImageUrl { get; set; }
+        public string? Category { get; set; }
+        public bool IsAvailable { get;private set; }
+        
         // Navigation properties
-        public virtual ICollection<Reservations> Reservations { get; set; } = new List<Reservations>();
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
+        public virtual ICollection<Supplier> Suppliers { get; set; } 
     }
 }

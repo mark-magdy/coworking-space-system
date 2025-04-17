@@ -36,8 +36,12 @@ namespace CO_Working_Space
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public string Role { get; set; } = "Client"; // Default role
 
-        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
-       
+
+
+        // Navigation properties
+        public virtual ICollection<Order> Orders { get; set; } 
+        public virtual ICollection<TotalReservations> TotalReservations { get; set; }
+
     }
 
 }
