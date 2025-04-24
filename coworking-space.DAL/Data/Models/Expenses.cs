@@ -8,5 +8,6 @@ namespace coworking_space.DAL.Data.Models
 {
     public class Expenses
     {
+        public int Id { get; set; }
     }
 }

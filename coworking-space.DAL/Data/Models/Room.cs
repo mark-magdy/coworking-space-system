@@ -27,7 +27,8 @@ namespace coworking_space.DAL.Data.Models
         public string? ImageUrl { get; set; }
         public bool IsAvailable { get;  set; }
 
-        
+        //navigation properties
+        public virtual ICollection<ReservationOfRoom> Reservations { get; set; } // Assuming a room can have multiple reservations
 
     }
 }

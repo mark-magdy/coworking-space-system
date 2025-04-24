@@ -12,7 +12,7 @@ namespace coworking_space.DAL.Data.Models
         public int Id {  get; set; }
         public string Description { get; set; }
         // navigation property 
-        public virtual ICollection<ReservationOfRoom> Reservations { get; set; }
+        public virtual ICollection<ReservationOfRoom> Reservations { get; set; }//total price is calculated from each reservation
         public User user { get; set; }  
         public int UsrId { get; set; }
         public virtual Payment Payment { get; set; }

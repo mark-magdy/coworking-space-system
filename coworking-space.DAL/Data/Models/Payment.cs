@@ -39,7 +39,8 @@ namespace coworking_space.DAL.Data.Models
        
         public int OrderId { get; set; }
         public Order Order { get; set; }   
-        public TotalReservations TotalReservations { get; set; }   
+        public TotalReservations TotalReservations { get; set; }
+        public int TotalReservationsId { get; set; } // Foreign key for TotalReservations
 
     }
 }
