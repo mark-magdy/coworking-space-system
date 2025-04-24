@@ -51,5 +51,8 @@ namespace coworking_space.DAL.Repository.Implementations {
     public class SuplierRepository : GenericRepository<Supplier>, ISuplierRepository {
         public SuplierRepository(Context context) : base(context) { }
     }
+    public class ProductRepository : GenericRepository<Product>, IProductRepository {
+        public ProductRepository(Context context) : base(context) { }
+    }
 
 }

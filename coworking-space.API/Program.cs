@@ -1,5 +1,9 @@
 
+using coworking_space.BAL.Interaces;
+using coworking_space.BAL.Services;
 using coworking_space.DAL.Data;
+using coworking_space.DAL.Repository.Implementations;
+using coworking_space.DAL.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 namespace coworking_space.API
 {
@@ -17,8 +21,13 @@ namespace coworking_space.API
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<Context>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-            var app = builder.Build();
 
+
+            builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+
+            var app = builder.Build();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

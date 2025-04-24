@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("coworking-space.DAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+40e4bb8ceac10ed16c6cd2db1364a993031a18f4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5bbd2ff00b88e4cf3b7868cc6b05d4aaa269c89b")]
 [assembly: System.Reflection.AssemblyProductAttribute("coworking-space.DAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("coworking-space.DAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

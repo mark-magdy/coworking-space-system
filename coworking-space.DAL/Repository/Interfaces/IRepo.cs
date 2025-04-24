@@ -32,5 +32,6 @@ namespace coworking_space.DAL.Repository.Interfaces {
 
     // Interfaces/ISuplierRepository.cs
     public interface ISuplierRepository : IGenericRepository<Supplier> { }
+    public interface IProductRepository : IGenericRepository<Product> { }
 
 }
