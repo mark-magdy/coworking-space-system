@@ -5,8 +5,8 @@
 *.suo
 
 # Build artifacts
-bin/
-obj/
+**/bin/
+**/obj/
 *.dll
 *.exe
 
