@@ -17,8 +17,8 @@ namespace coworking_space.DAL.Data.Models
         [DefaultValue(60)]
         public int MinimumBookingTime { get; set; } // in minutes
 
-        public decimal SharedPricePerPerson { get; set; }
-        public decimal PrivatePricePerPerson { get; set; }
+        public decimal SharedPricePerPerson { get; set; } //default prices
+        public decimal PrivatePricePerPerson { get; set; }//default prices
 
         public int Capacity { get; set; }
         public int CurrentCapacity { get; set; }

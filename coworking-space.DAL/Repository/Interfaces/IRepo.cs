@@ -23,6 +23,8 @@ namespace coworking_space.DAL.Repository.Interfaces {
 
     // Interfaces/IPurchasedItemRepository.cs
     //public interface IPurchasedItemRepository : IGenericRepository<PurchasedItem> { }
+    
+
 
     // Interfaces/IReservationsRepository.cs
     public interface IReservationsRepository : IGenericRepository<ReservationOfRoom> { }

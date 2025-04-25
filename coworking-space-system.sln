@@ -5,7 +5,7 @@ VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "coworking-space.API", "coworking-space.API\coworking-space.API.csproj", "{A3CA885B-3143-4545-9722-9122E3F48A51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "coworking-space.BAL", "coworking-space.BAL\coworking-space.BAL.csproj", "{E7DB7F8F-0849-4127-8647-9A0ACB8943C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "coworking-space.Bll", "coworking-space.BAL\coworking-space.Bll.csproj", "{E7DB7F8F-0849-4127-8647-9A0ACB8943C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "coworking-space.DAL", "coworking-space.DAL\coworking-space.DAL.csproj", "{CA76D397-4C75-404B-A9EF-1F9D5E0B49C4}"
 EndProject

@@ -32,8 +32,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.BAL\\coworking-space.BAL.csproj": {
-                "projectPath": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.BAL\\coworking-space.BAL.csproj"
+              "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.BAL\\coworking-space.Bll.csproj": {
+                "projectPath": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.BAL\\coworking-space.Bll.csproj"
               }
             }
           }
@@ -88,12 +88,12 @@
         }
       }
     },
-    "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.BAL\\coworking-space.BAL.csproj": {
+    "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.BAL\\coworking-space.Bll.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.BAL\\coworking-space.BAL.csproj",
-        "projectName": "coworking-space.BAL",
-        "projectPath": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.BAL\\coworking-space.BAL.csproj",
+        "projectUniqueName": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.BAL\\coworking-space.Bll.csproj",
+        "projectName": "coworking-space.Bll",
+        "projectPath": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.BAL\\coworking-space.Bll.csproj",
         "packagesPath": "C:\\Users\\kiro3\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.BAL\\obj\\",
         "projectStyle": "PackageReference",

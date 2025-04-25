@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\coworking-space.BAL\coworking-space.BAL.csproj" />
+    <ProjectReference Include="..\coworking-space.BAL\coworking-space.Bll.csproj" />
   </ItemGroup>
 
 </Project>
