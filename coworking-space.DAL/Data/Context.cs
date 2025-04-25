@@ -18,9 +18,9 @@ namespace coworking_space.DAL.Data
             modelBuilder.Entity<Order>()
                 .Property(o => o.Order_Status)
                 .HasConversion<string>();
-            modelBuilder.Entity<Product>()
-                .Property(Product => Product.IsAvailable)
-                .HasComputedColumnSql("CASE WHEN Quantity > 0 THEN 1 ELSE 0 END", stored:true );
+            //modelBuilder.Entity<Product>()
+            //    .Property(Product => Product.IsAvailable)
+            //    .HasComputedColumnSql("CASE WHEN Quantity > 0 THEN 1 ELSE 0 END", stored:true );
             //modelBuilder.Entity<Room>()    to be considered
             //    .Property(r => r.IsAvailable)
             //    .HasComputedColumnSql("CASE WHEN CurrentCapacity < Capacity THEN 1 ELSE 0 END", stored: true);

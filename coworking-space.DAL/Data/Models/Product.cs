@@ -15,10 +15,10 @@ namespace coworking_space.DAL.Data.Models
         public int Quantity { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public bool IsActive { get; set; }
+        public Boolean IsActive { get; set; }
         public string? ImageUrl { get; set; }
         public string? Category { get; set; }
-        public bool IsAvailable { get;private set; }
+        //public Boolean IsAvailable { get;private set; }
         
         // Navigation properties
         public virtual ICollection<OrderItem> OrderItems { get; set; }
