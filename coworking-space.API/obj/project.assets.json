@@ -1565,17 +1565,17 @@
           }
         }
       },
-      "coworking-space.Bll/1.0.0": {
+      "coworking-space.BAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "coworking-space.DAL": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/coworking-space.Bll.dll": {}
+          "bin/placeholder/coworking-space.BAL.dll": {}
         },
         "runtime": {
-          "bin/placeholder/coworking-space.Bll.dll": {}
+          "bin/placeholder/coworking-space.BAL.dll": {}
         }
       },
       "coworking-space.DAL/1.0.0": {
@@ -4469,10 +4469,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "coworking-space.Bll/1.0.0": {
+    "coworking-space.BAL/1.0.0": {
       "type": "project",
-      "path": "../coworking-space.BAL/coworking-space.Bll.csproj",
-      "msbuildProject": "../coworking-space.BAL/coworking-space.Bll.csproj"
+      "path": "../coworking-space.BAL/coworking-space.BAL.csproj",
+      "msbuildProject": "../coworking-space.BAL/coworking-space.BAL.csproj"
     },
     "coworking-space.DAL/1.0.0": {
       "type": "project",
@@ -4484,27 +4484,27 @@
     "net8.0": [
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.0",
       "Swashbuckle.AspNetCore >= 6.6.2",
-      "coworking-space.Bll >= 1.0.0"
+      "coworking-space.BAL >= 1.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kiro3\\.nuget\\packages\\": {},
+    "C:\\Users\\marka\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.API\\coworking-space.API.csproj",
+      "projectUniqueName": "D:\\courses\\DEPI Web\\gradProject\\coworking-space-system\\coworking-space.API\\coworking-space.API.csproj",
       "projectName": "coworking-space.API",
-      "projectPath": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.API\\coworking-space.API.csproj",
-      "packagesPath": "C:\\Users\\kiro3\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.API\\obj\\",
+      "projectPath": "D:\\courses\\DEPI Web\\gradProject\\coworking-space-system\\coworking-space.API\\coworking-space.API.csproj",
+      "packagesPath": "C:\\Users\\marka\\.nuget\\packages\\",
+      "outputPath": "D:\\courses\\DEPI Web\\gradProject\\coworking-space-system\\coworking-space.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\kiro3\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\marka\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4519,8 +4519,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.BAL\\coworking-space.Bll.csproj": {
-              "projectPath": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.BAL\\coworking-space.Bll.csproj"
+            "D:\\courses\\DEPI Web\\gradProject\\coworking-space-system\\coworking-space.BAL\\coworking-space.BAL.csproj": {
+              "projectPath": "D:\\courses\\DEPI Web\\gradProject\\coworking-space-system\\coworking-space.BAL\\coworking-space.BAL.csproj"
             }
           }
         }
@@ -4574,13 +4574,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.API\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }

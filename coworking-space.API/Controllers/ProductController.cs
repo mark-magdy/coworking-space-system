@@ -18,18 +18,9 @@ namespace coworking_space.API.Controllers {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            await _productService.AddProductAsync(dto);
+            var createdProduct = await _productService.AddProductAsync(dto);
 
-            var product = new {
-                Id = 1, // This should be replaced with the actual product ID after creation
-                Name = dto.Name,
-                Description = dto.Description,
-                Price = dto.Price,
-                Quantity = dto.Quantity,
-                ImageUrl = dto.ImageUrl,
-                Category = dto.Category
-            };
-            return CreatedAtAction(nameof(GetProductById), new { id = product.Id }, product);
+            return CreatedAtAction(nameof(GetProductById), new { id = createdProduct.Id }, createdProduct);
         }
 
         // Optional GET for CreatedAtAction support
