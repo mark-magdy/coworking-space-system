@@ -1,5 +1,7 @@
 
 using coworking_space.BAL.Interaces;
+using coworking_space.BAL.MangerInterfaces;
+using coworking_space.BAL.Mangers;
 using coworking_space.BAL.Services;
 using coworking_space.DAL.Data;
 using coworking_space.DAL.Repository.Implementations;
@@ -25,8 +27,12 @@ namespace coworking_space.API
 
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
             builder.Services.AddScoped<IRoomRepository, RoomRepository>();
             builder.Services.AddScoped<IRoomService, RoomService>();
+
+            builder.Services.AddScoped<ITotalReservationsManger, TotalReservationManger>();
+            builder.Services.AddScoped<ITotalReservationsRepository, TotalReservationsRepository>();
 
             var app = builder.Build();
             // Configure the HTTP request pipeline.
