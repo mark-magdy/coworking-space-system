@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace coworking_space.BAL.Interaces {
     public interface IProductService {
+
         Task<Product> AddProductAsync(CreateProductDto dto);
         Task<IEnumerable<Product>> GetProductsAsync(); 
     }

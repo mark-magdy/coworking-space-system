@@ -25,7 +25,8 @@ namespace coworking_space.API
 
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
-
+            builder.Services.AddScoped<IRoomRepository, RoomRepository>();
+            builder.Services.AddScoped<IRoomService, RoomService>();
 
             var app = builder.Build();
             // Configure the HTTP request pipeline.
