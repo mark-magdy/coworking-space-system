@@ -54,5 +54,5 @@ namespace coworking_space.DAL.Repository.Implementations {
     public class ProductRepository : GenericRepository<Product>, IProductRepository {
         public ProductRepository(Context context) : base(context) { }
     }
-
+    
 }

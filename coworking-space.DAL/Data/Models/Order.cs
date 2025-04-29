@@ -21,7 +21,7 @@ namespace coworking_space.DAL.Data.Models
         public Status Order_Status { get; set; }
         public decimal TotalPrice { get; set; }
         public string OrderDetails { get; set; } // Additional details about the order
-        bool InOut { get; set; } // Indicates if the order is in or out
+        public bool InOut { get; set; } // Indicates if the order is in or out
 
         // Navigation properties
         public virtual ICollection<OrderItem> OrderItems { get; set; } 

@@ -1,6 +1,7 @@
 ﻿using coworking_space.BAL.DTOs.OrderDTO;
 using coworking_space.BAL.Interaces;
 using coworking_space.DAL.Data.Models;
+using coworking_space.DAL.Repository.Implementations;
 using coworking_space.DAL.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,47 +11,134 @@ using System.Threading.Tasks;
 
 namespace coworking_space.BAL.Services {
     public class OrderService : IOrderService {
-        //private readonly IGenericRepository<Order> _orderRepo;
-        //private readonly IGenericRepository<OrderItem> _orderItemRepo;
+        private readonly IOrderRepository _orderRepo;
+        private readonly IOrderItemRepository _orderItemRepo;
         //private readonly IUnitOfWork _unitOfWork;
 
-        //public OrderService(IGenericRepository<Order> orderRepo, IGenericRepository<OrderItem> orderItemRepo, IUnitOfWork unitOfWork) {
-        //    _orderRepo = orderRepo;
-        //    _orderItemRepo = orderItemRepo;
-        //    _unitOfWork = unitOfWork;
-        //}
+        public OrderService(IOrderRepository orderRepo, IOrderItemRepository orderItemRepo) {
+            _orderRepo = orderRepo;
+            _orderItemRepo = orderItemRepo;
+            //_unitOfWork = unitOfWork;
+        }
+        public async Task<OrderReadDto> AddOrderAsync(OrderCreateDto dto) {
+            // Map the OrderCreateDto to an Order entity
+            var order = new Order
+            {
+                CreatedAt = dto.CreatedAt,
+                Order_Status = dto.Order_Status,
+                TotalPrice = dto.TotalPrice,
+                OrderDetails = dto.OrderDetails,
+                UserId = dto.UserId,
+                OrderItems = dto.OrderItems.Select(item => new OrderItem
+                {
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    Price = item.Price
+                }).ToList()
+            };
 
-        //public async Task<Order> AddOrderAsync(OrderCreateDto dto) {
-        //    var order = new Order
-        //    {
-        //        CreatedAt = dto.CreatedAt,
-        //        Order_Status = dto.Order_Status,
-        //        TotalPrice = dto.TotalPrice,
-        //        OrderDetails = dto.OrderDetails,
-        //        UserId = dto.UserId,
-        //        OrderItems = dto.OrderItems.Select(oi => new OrderItem
-        //        {
-        //            ProductId = oi.ProductId,
-        //            Quantity = oi.Quantity,
-        //            Price = oi.Price
-        //        }).ToList()
-        //    };
+            // Add the order to the repository
+            var savedOrdered = await _orderRepo.AddAsync(order);
 
-        //    await _orderRepo.AddAsync(order);
-        //    await _unitOfWork.SaveChangesAsync();
-        //    return order;
-        //}
+            // Return the created order as a DTO
+            return new OrderReadDto
+            {
+                Id = savedOrdered.Id,
+                CreatedAt = savedOrdered.CreatedAt,
+                Order_Status = savedOrdered.Order_Status,
+                TotalPrice = savedOrdered.TotalPrice,
+                OrderDetails = savedOrdered.OrderDetails,
+                UserId = savedOrdered.UserId,
+                OrderItems = savedOrdered.OrderItems.Select(item => new OrderItemReadDto
+                {
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    Price = item.Price
+                }).ToList()
+            };
+        }
+        public async Task<IEnumerable<OrderReadDto>> GetAllOrdersAsync() {
+            // Retrieve all orders from the repository  
+            var orders = await _orderRepo.GetAllAsync();
 
-        //public async Task<IEnumerable<Order>> GetAllOrdersAsync() {
-        //    return await _orderRepo.GetAllAsync();
-        //}
+            // Map the orders to a list of OrderReadDto  
+            return orders.Select(order => new OrderReadDto
+            {
+                Id = order.Id,
+                CreatedAt = order.CreatedAt,
+                Order_Status = order.Order_Status,
+                TotalPrice = order.TotalPrice,
+                OrderDetails = order.OrderDetails,
+                InOut = order.InOut,
+                UserId = order.UserId,
+                UserName = order.User?.Name,
+                OrderItems = order.OrderItems.Select(item => new OrderItemReadDto
+                {
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    Price = item.Price
+                }).ToList()
+            });
+        }
+        public async Task<OrderReadDto> GetOrderByIdAsync(int id) {
+            // Retrieve the order by ID from the repository  
+            var order = await _orderRepo.GetByIdAsync(id);
+            if (order == null) {
+                throw new KeyNotFoundException($"Order with ID {id} not found.");
+            }
 
-        //public async Task<Order> GetOrderByIdAsync(int id) {
-        //    return await _orderRepo.GetByIdAsync(id);
-        //}
+            // Map the order to an OrderReadDto  
+            return new OrderReadDto
+            {
+                Id = order.Id,
+                CreatedAt = order.CreatedAt,
+                Order_Status = order.Order_Status,
+                TotalPrice = order.TotalPrice,
+                OrderDetails = order.OrderDetails,
+                InOut = order.InOut,
+                UserId = order.UserId,
+                UserName = order.User?.Name,
+                OrderItems = order.OrderItems.Select(item => new OrderItemReadDto
+                {
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    Price = item.Price
+                }).ToList()
+            };
+        }
+        public async Task<bool> DeleteOrderAsync(int id) {
+            await _orderRepo.DeleteByIdAsync(id);
+            var deletedItem = _orderRepo.GetByIdAsync(id);
+            if (deletedItem == null)
+                return true;
+            else return false; 
+        }
+        public async Task<OrderUpdateDto> UpdateOrder(int id, OrderUpdateDto value) {
+            // Retrieve the existing order by ID
+            var order = await _orderRepo.GetByIdAsync(id);
+            if (order == null) {
+                throw new KeyNotFoundException($"Order with ID {id} not found.");
+            }
 
-        //public async Task<bool> DeleteOrderAsync(int id) {
-        //    return await _orderRepo.DeleteAsync(id);
-        //}
+            // Update the order's properties with the new values
+            order.Order_Status = value.Order_Status;
+            order.OrderDetails = value.OrderDetails;
+            order.InOut = value.InOut;
+
+            // Update the order in the repository
+            _orderRepo.Update(order);
+
+            // Save changes to the database
+            await _orderRepo.SaveAsync();
+
+            // Return the updated order as a DTO
+            return new OrderUpdateDto
+            {
+                Order_Status = order.Order_Status,
+                OrderDetails = order.OrderDetails,
+                InOut = order.InOut
+            };
+        }
     }
+
 }
