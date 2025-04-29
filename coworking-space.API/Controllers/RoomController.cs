@@ -7,11 +7,17 @@ namespace coworking_space.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+<<<<<<< HEAD
     public class RoomController : ControllerBase
     {
         private readonly IRoomService _roomService;
         public RoomController(IRoomService roomService)
         {
+=======
+    public class RoomController : ControllerBase {
+        private  readonly IRoomService _roomService;
+        public RoomController(IRoomService roomService) {
+>>>>>>> df9c69004d4110000d5eff22561ce8881ab0103c
             _roomService = roomService;
         }
 

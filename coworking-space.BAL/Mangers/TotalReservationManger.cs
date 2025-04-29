@@ -10,8 +10,12 @@ using System.Threading.Tasks;
 
 namespace coworking_space.BAL.Mangers
 {
+<<<<<<< HEAD
     public class TotalReservationManger : ITotalReservationsManger
     {
+=======
+    public class TotalReservationManger : ITotalReservationsManger {
+>>>>>>> df9c69004d4110000d5eff22561ce8881ab0103c
         private readonly ITotalReservationsRepository _reservationRepository;
 
         const decimal pricePerHourShared = 10; // Example price per hour
@@ -38,7 +42,7 @@ namespace coworking_space.BAL.Mangers
             foreach (var reservation in totalReservation.Reservations)
             {
                
-                if (reservation.EndDate < timeNow && reservation.EndDate != null) //ended but not paid 
+                if (  reservation.EndDate != null&&reservation.EndDate < timeNow) //ended but not paid 
                 {
                     reservation.PriceTillNow = reservation.TotalPrice;
                     totalPrice += reservation.TotalPrice;
@@ -95,5 +99,9 @@ namespace coworking_space.BAL.Mangers
 
 
     }
+<<<<<<< HEAD
  }
+=======
+}
+>>>>>>> df9c69004d4110000d5eff22561ce8881ab0103c
 
