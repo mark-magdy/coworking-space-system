@@ -21,6 +21,7 @@ namespace coworking_space.BAL.Services {
             //_unitOfWork = unitOfWork;
         }
         public async Task<OrderReadDto> AddOrderAsync(OrderCreateDto dto) {
+
             // Map the OrderCreateDto to an Order entity
             var order = new Order
             {
@@ -29,16 +30,23 @@ namespace coworking_space.BAL.Services {
                 TotalPrice = dto.TotalPrice,
                 OrderDetails = dto.OrderDetails,
                 UserId = dto.UserId,
-                OrderItems = dto.OrderItems.Select(item => new OrderItem
+                OrderItems = new List<OrderItem>() // Ensure it's initialized
+            };
+
+            // Add items individually to the collection
+            foreach (var item in dto.OrderItems) {
+                order.OrderItems.Add(new OrderItem
                 {
                     ProductId = item.ProductId,
                     Quantity = item.Quantity,
                     Price = item.Price
-                }).ToList()
-            };
+                });
+            }
 
             // Add the order to the repository
             var savedOrdered = await _orderRepo.AddAsync(order);
+            await _orderRepo.SaveAsync();
+            //_orderItemRepo.SaveAsync();
 
             // Return the created order as a DTO
             return new OrderReadDto
@@ -60,7 +68,8 @@ namespace coworking_space.BAL.Services {
         public async Task<IEnumerable<OrderReadDto>> GetAllOrdersAsync() {
             // Retrieve all orders from the repository  
             var orders = await _orderRepo.GetAllAsync();
-
+            if(orders==null) 
+                throw new KeyNotFoundException("No orders found.");
             // Map the orders to a list of OrderReadDto  
             return orders.Select(order => new OrderReadDto
             {
@@ -139,6 +148,7 @@ namespace coworking_space.BAL.Services {
                 InOut = order.InOut
             };
         }
+        
     }
 
 }

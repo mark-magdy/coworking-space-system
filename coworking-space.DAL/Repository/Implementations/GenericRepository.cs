@@ -15,7 +15,16 @@ namespace coworking_space.DAL.Repository.Implementations {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _dbSet = _context.Set<T>();
         }
-        public async Task<IEnumerable<T>> GetAllAsync() => await _dbSet.ToListAsync();
+        public virtual async Task<IEnumerable<T>> GetAllAsync(int? page = null, int? pageSize = null) {
+            IQueryable<T> query = _dbSet;
+
+            if (page.HasValue && pageSize.HasValue) {
+                int skip = (page.Value - 1) * pageSize.Value;
+                query = query.Skip(skip).Take(pageSize.Value);
+            }
+
+            return await query.ToListAsync();
+        }
         public async Task<T?> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
         public async Task<T> AddAsync(T entity) {
             await _dbSet.AddAsync(entity);   // Add entity to DbSet

@@ -16,7 +16,8 @@ namespace coworking_space.DAL.Repository.Interfaces {
     public interface IOrderRepository : IGenericRepository<Order> { }
 
     // Interfaces/IOrderItemRepository.cs
-    public interface IOrderItemRepository : IGenericRepository<OrderItem> { }
+    public interface IOrderItemRepository : IGenericRepository<OrderItem> { 
+    }
 
     // Interfaces/IPaymentRepository.cs
     public interface IPaymentRepository : IGenericRepository<Payment> { }
