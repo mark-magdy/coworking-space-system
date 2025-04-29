@@ -45,7 +45,7 @@
     "ContainingType": "coworking_space.API.Controllers.RoomController",
     "Method": "Get",
     "RelativePath": "api/Room",
-    "HttpMethod": "",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
