@@ -1,4 +1,5 @@
 ﻿using coworking_space.BAL.Dtos.TotalReservationsDTo;
+using coworking_space.BAL.MangerInterfaces;
 using coworking_space.DAL.Data.Models;
 using coworking_space.DAL.Repository.Interfaces;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace coworking_space.BAL.Mangers
 {
-    public class TotalReservationManger : ITotalReservationManger
+    public class TotalReservationManger : ITotalReservationsManger
     {
         private readonly ITotalReservationsRepository _reservationRepository;
 
@@ -94,5 +95,5 @@ namespace coworking_space.BAL.Mangers
 
 
     }
-    }
-}
+ }
+
