@@ -100,7 +100,6 @@ namespace coworking_space.BAL.Services {
                 throw new Exception("Room not found");
             }
 
-            // TODO: check if the room already exists
             // TODO: validate the roomUpdateDto
 
             room.Name = roomUpdateDto.Name;

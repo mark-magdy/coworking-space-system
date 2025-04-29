@@ -11,6 +11,7 @@ namespace coworking_space.DAL.Repository.Interfaces {
         Task<T> AddAsync(T entity);
         void Update(T entity);
         void Delete(T entity);
-        Task SaveAsync();
+        Task DeleteByIdAsync(int id);
+        Task<bool> SaveAsync();
     }
 }
