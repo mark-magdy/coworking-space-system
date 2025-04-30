@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using coworking_space.DAL.Data;
 
@@ -11,9 +12,11 @@ using coworking_space.DAL.Data;
 namespace coworking_space.DAL.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20250429211825_update_database_inOut_column")]
+    partial class update_database_inOut_column
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -269,21 +272,19 @@ namespace coworking_space.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("EndDate")
+                    b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsPrivate")
                         .HasColumnType("bit");
 
                     b.Property<string>("Notes")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<< HEAD
-=======
                     b.Property<int>("NumberOfPeople")
                         .HasColumnType("int");
 
->>>>>>> 925e923fa9243e31a44ea46a368805e212afedec
                     b.Property<decimal>("PriceTillNow")
                         .HasColumnType("decimal(18,2)");
 
@@ -291,6 +292,7 @@ namespace coworking_space.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("SpecialRequests")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartDate")
@@ -353,9 +355,6 @@ namespace coworking_space.DAL.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PrivateCapacity")
-                        .HasColumnType("int");
 
                     b.Property<decimal>("PrivatePrice")
                         .HasColumnType("decimal(18,2)");
@@ -421,14 +420,18 @@ namespace coworking_space.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("UsrId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("userId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("userId");
 
                     b.ToTable("TotalReservations");
                 });
@@ -512,7 +515,7 @@ namespace coworking_space.DAL.Migrations
                 {
                     b.HasOne("CO_Working_Space.User", "user")
                         .WithMany("TotalReservations")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("userId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -548,7 +551,8 @@ namespace coworking_space.DAL.Migrations
 
             modelBuilder.Entity("coworking_space.DAL.Data.Models.TotalReservations", b =>
                 {
-                    b.Navigation("Payment");
+                    b.Navigation("Payment")
+                        .IsRequired();
 
                     b.Navigation("Reservations");
                 });

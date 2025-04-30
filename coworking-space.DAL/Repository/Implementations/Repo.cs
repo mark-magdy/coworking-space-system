@@ -18,9 +18,9 @@ namespace coworking_space.DAL.Repository.Implementations {
     }
 
     // Implementations/OrderRepository.cs
-    public class OrderRepository : GenericRepository<Order>, IOrderRepository {
-        public OrderRepository(Context context) : base(context) { }
-    }
+    //public class OrderRepository : GenericRepository<Order>, IOrderRepository {
+    //    public OrderRepository(Context context) : base(context) { }
+    //}
 
     // Implementations/OrderItemRepository.cs
     public class OrderItemRepository : GenericRepository<OrderItem>, IOrderItemRepository {
