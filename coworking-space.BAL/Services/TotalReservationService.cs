@@ -1,5 +1,5 @@
 ﻿using coworking_space.BAL.Dtos.TotalReservationsDTo;
-using coworking_space.BAL.MangerInterfaces;
+using coworking_space.BAL.Interaces;
 using coworking_space.DAL.Data.Models;
 using coworking_space.DAL.Repository.Interfaces;
 using System;
@@ -8,17 +8,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace coworking_space.BAL.Mangers
+namespace coworking_space.BAL.Services
 {
 
-    public class TotalReservationManger : ITotalReservationsManger
+    public class TotalReservationService : ITotalReservationsService
     {
         private readonly ITotalReservationsRepository _reservationRepository;
+        private readonly IRoomRepository _roomRepository;
 
         const decimal pricePerHourShared = 10; // Example price per hour
-        public TotalReservationManger(ITotalReservationsRepository reservationRepository)
+        public TotalReservationService(ITotalReservationsRepository reservationRepository, IRoomRepository roomRepository)
         {
             _reservationRepository = reservationRepository;
+            _roomRepository = roomRepository;
         }
         public TotalReservationsReadDto GetTotalReservations(int id, Status status)
         {
@@ -29,7 +31,7 @@ namespace coworking_space.BAL.Mangers
                 throw new KeyNotFoundException("Reservation not found.");
 
             //logic of calculating   //computing Pricetillnow for each reservation
-            
+
             //the logic of updating the total price of each reservation is executed when one left the room
             //while leaving the current capacity of room is updated and total price and update date of each reservation  ->postprocess
 
@@ -38,36 +40,37 @@ namespace coworking_space.BAL.Mangers
             DateTime timeNow = DateTime.Now;
             foreach (var reservation in totalReservation.Reservations)
             {
-               
-                if (  reservation.EndDate != null&&reservation.EndDate < timeNow) //ended but not paid 
+
+                if (reservation.EndDate != null && reservation.EndDate < timeNow) //ended but not paid 
                 {
                     reservation.PriceTillNow = reservation.TotalPrice;
                     totalPrice += reservation.TotalPrice;
                 }
-                else 
-                { 
+                else
+                {
                     decimal price = 0;
-                    if (reservation.IsPrivate) {
+                    if (reservation.IsPrivate)
+                    {
                         price = reservation.TotalPrice;
                         decimal timeSpan = (decimal)(timeNow - reservation.UpdatedPriceDate).TotalHours;
                         var room = reservation.Rooms;
 
-                        if (room.CurrentCapacity > room.Capacity)
-                            price += (reservation.Rooms.PrivatePricePerPerson * timeSpan);
+                        if (room.CurrentCapacity > room.MinimumPrivateCapacity)
+                            price += reservation.Rooms.PrivatePricePerPerson * timeSpan;
 
                         else
-                            price += (reservation.Rooms.PrivatePrice / room.CurrentCapacity);
+                            price += (reservation.Rooms.PrivatePrice / room.CurrentCapacity)*timeSpan;
                         reservation.PriceTillNow = price;
                     }
                     else //shared
                     {
                         price = reservation.TotalPrice;
                         decimal timeSpan = (decimal)(timeNow - reservation.StartDate).TotalHours;
-                        price += (reservation.Rooms.SharedPricePerPerson * timeSpan);
+                        price += reservation.Rooms.SharedPricePerPerson * timeSpan;
                         reservation.PriceTillNow = price;
                     }
                     totalPrice += price;
-                } 
+                }
             }
 
             return new TotalReservationsReadDto
@@ -80,12 +83,12 @@ namespace coworking_space.BAL.Mangers
             .Select(r => new ReservationReadDto
             {
                 StartDate = r.StartDate,
-                EndDate = r.EndDate,
+                EndDate = (DateTime)r.EndDate,
                 Status = r.Status,
                 Notes = r.Notes,
                 PriceTillNow = r.PriceTillNow,
                 IsPrivate = r.IsPrivate,
-                Rooms = new RoomReadDto
+                Rooms = new RoomReadReservationDto
                 {
                     Name = r.Rooms.Name,
                     Description = r.Rooms.Description
@@ -94,8 +97,50 @@ namespace coworking_space.BAL.Mangers
             };
         }
 
+        public ReservationOfRoom AddReservation(ReservationCreateDto reservationCreateDto, int id)
+        {
+            var reservation = new ReservationOfRoom
+            {
+                StartDate = DateTime.Now, // Set to current date/time
 
-    }
- }
+
+                Status = Status.Pending, // Set to a default status
+                SpecialRequests = reservationCreateDto.SpecialRequests,
+                Notes = reservationCreateDto.Notes,
+                TotalPrice = 0, // Initialize to 0 or some default value
+                PriceTillNow = 0, // Initialize to 0 or some default value
+                UpdatedPriceDate = DateTime.Now, // Set to current date/time
+                IsPrivate = reservationCreateDto.IsPrivate,
+                RoomId = reservationCreateDto.RoomId
+            };
+            //checking if room is available 
+            Room room = _roomRepository.GetByIdAsync(reservationCreateDto.RoomId).Result;
+            if (room.CurrentCapacity == room.Capacity)
+            {
+                throw new InvalidOperationException("Room is not available.");
+            }
+            else
+            {
+                room.CurrentCapacity++;
+
+                _roomRepository.Update(room);
+                reservation.Rooms = room;
+                _reservationRepository.AddReservation(reservation,id);
+                return reservation;
+
+            }
+        }
+        public async Task<TotalReservations>  MakeTotalReservation(TotalReservationCreateDto totalReservationCreateDto)
+        {
+            var totalReservation = new TotalReservations
+            {
+                UserId = totalReservationCreateDto.UserId
+            };
+            var createdTotalReservation=await  _reservationRepository.AddAsync(totalReservation);
+             await _reservationRepository.SaveAsync();
+            return createdTotalReservation;
+
+        }
+    } }
 
 

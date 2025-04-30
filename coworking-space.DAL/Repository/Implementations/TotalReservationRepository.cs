@@ -10,15 +10,31 @@ using Microsoft.EntityFrameworkCore;
 
 namespace coworking_space.DAL.Repository.Implementations
 {
-    public class TotalReservationsRepository : GenericRepository<TotalReservations>, ITotalReservationsRepository 
+    public class TotalReservationsRepository : GenericRepository<TotalReservations>, ITotalReservationsRepository
     {
-            public TotalReservationsRepository(Context context) : base(context) { }
-            public TotalReservations getReservationsByid(int id)
+        public TotalReservationsRepository(Context context) : base(context) { }
+        public TotalReservations getReservationsByid(int id)
         {
             return _context.TotalReservations
        .Include(tr => tr.Reservations)
            .ThenInclude(r => r.Rooms)
        .FirstOrDefault(tr => tr.Id == id);
+        }
+        public void AddReservation(ReservationOfRoom reservation, int id)
+        {
+            var totalReservation = _context.TotalReservations
+                .Include(tr => tr.Reservations)
+                .FirstOrDefault(tr => tr.Id == id);
+            if (totalReservation != null)
+            {
+                totalReservation.Reservations.Add(reservation);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Total reservation not found");
+            }
+
         }
 
     }

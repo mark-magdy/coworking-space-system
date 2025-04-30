@@ -21,6 +21,7 @@ namespace coworking_space.DAL.Data.Models
         public decimal PrivatePricePerPerson { get; set; }//default prices
 
         public int Capacity { get; set; }
+       
         public int CurrentCapacity { get; set; }
         public string? ImageUrl { get; set; }
         // ^^ the above in the DTO 
