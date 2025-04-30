@@ -79,7 +79,7 @@ namespace coworking_space.BAL.Services
                 description = totalReservation.Description,
                 totalPrice = totalPrice,
                 reservations = totalReservation.Reservations
-            .Where(r => r.Status == status) // ✅ Business logic lives here
+            //.Where(r => r.Status == status) // ✅ Business logic lives here
             .Select(r => new ReservationReadDto
             {
                 StartDate = r.StartDate,

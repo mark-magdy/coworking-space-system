@@ -278,12 +278,10 @@ namespace coworking_space.DAL.Migrations
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<< HEAD
-=======
+
                     b.Property<int>("NumberOfPeople")
                         .HasColumnType("int");
 
->>>>>>> 925e923fa9243e31a44ea46a368805e212afedec
                     b.Property<decimal>("PriceTillNow")
                         .HasColumnType("decimal(18,2)");
 
