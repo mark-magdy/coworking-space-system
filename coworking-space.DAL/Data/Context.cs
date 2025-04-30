@@ -38,7 +38,12 @@ namespace coworking_space.DAL.Data
                       .OnDelete(DeleteBehavior.Restrict);
 
 
-
+            //modelBuilder.Entity<ReservationOfRoom>()
+            //    .Property(r=>r.PriceTillNow)
+            //    .HasComputedColumnSql("CASE WHEN Quantity > 0 THEN 1 ELSE 0 END", stored: true);
+            //modelBuilder.Entity<Room>()    to be considered
+            //    .Property(r => r.IsAvailable)
+            //    .HasComputedColumnSql("CASE WHEN CurrentCapacity < Capacity THEN 1 ELSE 0 END", stored: true);
         }
 
         public  DbSet<User> Users { get; set; }

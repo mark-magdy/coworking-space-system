@@ -24,10 +24,10 @@ namespace coworking_space.BAL.Dtos.TotalReservationsDTo
         public decimal PriceTillNow { get; set; } // e.g., price per hour for the reservation
        
         public bool IsPrivate { get; set; }
-        public RoomReadDto Rooms { get; set; }
+        public RoomReadReservationDto Rooms { get; set; }
 
     }
-    public class RoomReadDto
+    public class RoomReadReservationDto
     {
         public string Name { get; set; }
         public string Description { get; set; }

@@ -1,7 +1,5 @@
 
 using coworking_space.BAL.Interaces;
-using coworking_space.BAL.MangerInterfaces;
-using coworking_space.BAL.Mangers;
 using coworking_space.BAL.Services;
 using coworking_space.DAL.Data;
 using coworking_space.DAL.Repository.Implementations;
@@ -24,7 +22,6 @@ namespace coworking_space.API
             builder.Services.AddDbContext<Context>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            //builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
@@ -32,13 +29,9 @@ namespace coworking_space.API
             builder.Services.AddScoped<IRoomRepository, RoomRepository>();
             builder.Services.AddScoped<IRoomService, RoomService>();
 
-            builder.Services.AddScoped<ITotalReservationsManger, TotalReservationManger>();
+            builder.Services.AddScoped<ITotalReservationsService, TotalReservationService>();
             builder.Services.AddScoped<ITotalReservationsRepository, TotalReservationsRepository>();
-            
-            builder.Services.AddScoped<IOrderService,  OrderService>();
-            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
-            builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
             var app = builder.Build();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
