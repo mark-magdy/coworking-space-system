@@ -32,6 +32,12 @@ namespace coworking_space.API
             builder.Services.AddScoped<ITotalReservationsService, TotalReservationService>();
             builder.Services.AddScoped<ITotalReservationsRepository, TotalReservationsRepository>();
 
+            builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
+            builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+           
+
             var app = builder.Build();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

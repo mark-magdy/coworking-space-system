@@ -24,6 +24,8 @@ namespace coworking_space.DAL.Data.Models
         public virtual Room Rooms { get; set; } // Assuming a reservation can be for multiple rooms
 
         public int TotalReservationsId { get; set; }
+
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual TotalReservations TotalReservations { get; set; } // Assuming a reservation can be for multiple total reservations
 
     }
