@@ -4,6 +4,8 @@ using coworking_space.DAL.Data.Models;
 using coworking_space.DAL.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,17 +17,30 @@ namespace coworking_space.BAL.Services
     {
         private readonly ITotalReservationsRepository _reservationRepository;
         private readonly IRoomRepository _roomRepository;
+        private readonly IReservationsRepository _reserveRepo;
 
         const decimal pricePerHourShared = 10; // Example price per hour
-        public TotalReservationService(ITotalReservationsRepository reservationRepository, IRoomRepository roomRepository)
+        public TotalReservationService(ITotalReservationsRepository reservationRepository, IRoomRepository roomRepository, IReservationsRepository reservrepo)
         {
             _reservationRepository = reservationRepository;
             _roomRepository = roomRepository;
+            _reserveRepo = reservrepo;
+
         }
-        public TotalReservationsReadDto GetTotalReservations(int id, Status status)
+        public async Task<List<TotalReservationsReadDto>> GetAllTotalReservationsAsync()
+        {
+            var totalReservations = await _reservationRepository.GetAllAsync();
+            if (totalReservations == null || !totalReservations.Any())
+            {
+                return new List<TotalReservationsReadDto>();
+            }
+            //the paid total reservations are not included in the list of total reservations
+            return totalReservations.Select(tr =>GetTotalReservations(tr.Id) ).ToList();//this for not paid total reservations
+        }
+        public TotalReservationsReadDto? GetTotalReservations(int id)//calculation of the current total reservation 
         {
             var totalReservation = _reservationRepository.getReservationsByid(id);
-            var reservations_status = totalReservation.Reservations.Where(r => r.Status == status).ToList();//the list of status i want
+            //  var reservations_status = totalReservation.Reservations.Where(r => r.Status == status).ToList();//the list of status i want
 
             if (totalReservation == null)
                 throw new KeyNotFoundException("Reservation not found.");
@@ -41,12 +56,12 @@ namespace coworking_space.BAL.Services
             foreach (var reservation in totalReservation.Reservations)
             {
 
-                if (reservation.EndDate != null && reservation.EndDate < timeNow) //ended but not paid 
+                if (reservation.Status==Status.Completed) //ended but not paid 
                 {
                     reservation.PriceTillNow = reservation.TotalPrice;
                     totalPrice += reservation.TotalPrice;
                 }
-                else
+                else if(reservation.Status==Status.Pending)
                 {
                     decimal price = 0;
                     if (reservation.IsPrivate)
@@ -59,7 +74,7 @@ namespace coworking_space.BAL.Services
                             price += reservation.Rooms.PrivatePricePerPerson * timeSpan;
 
                         else
-                            price += (reservation.Rooms.PrivatePrice / room.CurrentCapacity)*timeSpan;
+                            price += (reservation.Rooms.PrivatePrice / room.CurrentCapacity) * timeSpan;
                         reservation.PriceTillNow = price;
                     }
                     else //shared
@@ -73,32 +88,78 @@ namespace coworking_space.BAL.Services
                 }
             }
 
-            return new TotalReservationsReadDto
+            var ret = new TotalReservationsReadDto
             {
-
+                Id = totalReservation.Id,
                 description = totalReservation.Description,
                 totalPrice = totalPrice,
                 reservations = totalReservation.Reservations
-            //.Where(r => r.Status == status) // ✅ Business logic lives here
-            .Select(r => new ReservationReadDto
+             //.Where(r => r.Status == status) // ✅ Business logic lives here
+             .Select(r => new ReservationReadDto
+             {
+                 Id = r.Id,
+                 StartDate = r.StartDate,
+                 EndDate = r.EndDate.HasValue ? r.EndDate.Value : default(DateTime),
+                 Status = r.Status,
+                 Notes = r.Notes,
+                 PriceTillNow = r.PriceTillNow,
+                 IsPrivate = r.IsPrivate,
+                 Rooms = new RoomReadReservationDto
+                 {
+                     Id = r.Rooms.ID,
+                     Name = r.Rooms.Name,
+                     Description = r.Rooms.Description
+                 }
+             }).ToList()
+            };
+            return ret;
+        }
+        public ReservationReadDto? GetReservationFromTotalReservation(int totalReservationId, int reservationId)
+        {
+            //need logic 
+            var totalReservation = _reservationRepository.getReservationsByid(totalReservationId);
+            if (totalReservation == null)
             {
-                StartDate = r.StartDate,
-                EndDate = (DateTime)r.EndDate,
-                Status = r.Status,
-                Notes = r.Notes,
-                PriceTillNow = r.PriceTillNow,
-                IsPrivate = r.IsPrivate,
+                return null;
+            }
+
+            var reservation = totalReservation.Reservations.FirstOrDefault(r => r.Id == reservationId);
+            if (reservation == null)
+            {
+                return null;
+            }
+
+            return new ReservationReadDto
+            {
+                Id = reservation.Id,
+                StartDate = reservation.StartDate,
+                EndDate = reservation.EndDate.HasValue ? reservation.EndDate.Value : default(DateTime),
+                Status = reservation.Status,
+                Notes = reservation.Notes,
+                PriceTillNow = reservation.TotalPrice,
+                IsPrivate = reservation.IsPrivate,
                 Rooms = new RoomReadReservationDto
                 {
-                    Name = r.Rooms.Name,
-                    Description = r.Rooms.Description
+                    Id = reservation.Rooms.ID,
+                    Name = reservation.Rooms.Name,
+                    Description = reservation.Rooms.Description
                 }
-            }).ToList()
             };
         }
 
-        public ReservationOfRoom AddReservation(ReservationCreateDto reservationCreateDto, int id)
+        public ReservationReadDto AddReservation(ReservationCreateDto reservationCreateDto, int id)
         {
+            var totalreservation = _reservationRepository.getReservationsByid(id);
+            if (totalreservation.Reservations.Any())
+            {
+                foreach (var res in totalreservation.Reservations)
+                {
+                    if (res.Status == Status.Pending)
+                    {
+                        throw new InvalidOperationException("Cannot add a new reservation while there are pending reservations.");
+                    }
+                }
+            }
             var reservation = new ReservationOfRoom
             {
                 StartDate = DateTime.Now, // Set to current date/time
@@ -125,22 +186,182 @@ namespace coworking_space.BAL.Services
 
                 _roomRepository.Update(room);
                 reservation.Rooms = room;
-                _reservationRepository.AddReservation(reservation,id);
-                return reservation;
+                _reservationRepository.AddReservation(reservation, id);
+                return new ReservationReadDto
+                {
+                    Id = reservation.Id,
+                    StartDate = reservation.StartDate,
+                    EndDate = reservation.EndDate.HasValue ? reservation.EndDate.Value : default(DateTime),
+                    Status = reservation.Status,
+                    Notes = reservation.Notes,
+                    PriceTillNow = reservation.PriceTillNow,
+                    IsPrivate = reservation.IsPrivate,
+                    Rooms = new RoomReadReservationDto
+                    {
+                        Id = room.ID,
+                        Name = room.Name,
+                        Description = room.Description
+                    }
+                };
 
             }
         }
-        public async Task<TotalReservations>  MakeTotalReservation(TotalReservationCreateDto totalReservationCreateDto)
+        public async Task<TotalReservationsReadDto> MakeTotalReservation(TotalReservationCreateDto totalReservationCreateDto)
         {
             var totalReservation = new TotalReservations
             {
-                UserId = totalReservationCreateDto.UserId
+                UserId = totalReservationCreateDto.UserId,
+                Price = 0
             };
-            var createdTotalReservation=await  _reservationRepository.AddAsync(totalReservation);
-             await _reservationRepository.SaveAsync();
-            return createdTotalReservation;
+            var createdTotalReservation = await _reservationRepository.AddAsync(totalReservation);
+            await _reservationRepository.SaveAsync();
+            return new TotalReservationsReadDto
+            {
+                Id = createdTotalReservation.Id,
+                description = createdTotalReservation.Description,
+                totalPrice = createdTotalReservation.Price,
+              
+            };
 
         }
-    } }
+        public async Task<ReservationReadDto> UpdateReservation(int id, ReservationUpdateDto reservationUpdateDto)
+        {
+            DateTime timeNow = DateTime.Now;
+            var totalReservation = _reservationRepository.getReservationsByid(id);
+            if (totalReservation == null)
+                throw new KeyNotFoundException("Reservation not found.");
+
+            var reservation = totalReservation.Reservations.FirstOrDefault(r => r.Id == reservationUpdateDto.Id);
+            if (reservation.Status == Status.Pending && reservationUpdateDto.Status == Status.Completed)//departure
+            {
+
+                if (reservation.IsPrivate)
+                {
+
+
+
+                    var room = await _roomRepository.getRoomByIdWithReservations(reservation.RoomId);//any repo must have await 
+                    if (room == null)
+                        throw new KeyNotFoundException("Room not found.");
+
+                    var reservationsInRoom = room.Reservations.Where(r => r.Status == Status.Pending);//don't need paging
+
+                    if (room.CurrentCapacity > room.MinimumPrivateCapacity)
+                        foreach (var res in reservationsInRoom)
+                        {
+                            decimal timeSpan = (decimal)(timeNow - res.UpdatedPriceDate).TotalHours;
+                            res.TotalPrice += room.PrivatePricePerPerson * (timeSpan);
+                            res.UpdatedPriceDate = timeNow;
+                            _reserveRepo.Update(res);
+                            await _reserveRepo.SaveAsync();
+                        }
+
+
+                    else
+                        foreach (var res in reservationsInRoom)
+                        {
+                            decimal timeSpan = (decimal)(DateTime.Now - res.UpdatedPriceDate).TotalHours;
+                            res.TotalPrice += (room.PrivatePrice / room.CurrentCapacity) * timeSpan;
+                            res.UpdatedPriceDate = timeNow;
+
+                            _reserveRepo.Update(res);
+                            await _reserveRepo.SaveAsync();
+                        }
+
+
+
+
+                }
+
+                else
+                {
+
+                    var price = reservation.Rooms.SharedPricePerPerson;
+                    decimal timeSpan = (decimal)(timeNow - reservation.StartDate).TotalHours;
+                    reservation.TotalPrice += price * timeSpan;
+                    reservation.UpdatedPriceDate = timeNow;
+                    _reserveRepo.Update(reservation);
+                    await _reserveRepo.SaveAsync();
+                }
+                reservation.EndDate = timeNow;
+                reservation.Status = (Status)reservationUpdateDto.Status;
+
+
+                reservation.Rooms.CurrentCapacity--;
+                _roomRepository.Update(reservation.Rooms);
+                await _roomRepository.SaveAsync();
+
+            }
+            else if (reservation.Status == Status.Pending && reservationUpdateDto.Status == Status.Cancelled)
+            {
+                reservation.Status = (Status)reservationUpdateDto.Status;
+                reservation.EndDate = timeNow;
+                reservation.TotalPrice = 0;
+                reservation.Rooms.CurrentCapacity--;
+                _roomRepository.Update(reservation.Rooms);
+                await _roomRepository.SaveAsync();
+            }
+            else
+            {
+                reservation.Status = (Status)reservationUpdateDto.Status;
+            }
+            reservation.StartDate = (reservationUpdateDto.StartDate != null) ? reservation.StartDate : default(DateTime);
+            reservation.Notes = reservationUpdateDto.Notes;
+            reservation.SpecialRequests = reservationUpdateDto.SpecialRequests;
+            _reserveRepo.Update(reservation);
+            await _reserveRepo.SaveAsync();
+
+            var ret= new ReservationReadDto
+            {
+                Id = reservation.Id,
+                StartDate = reservation.StartDate,
+                EndDate = reservation.EndDate.HasValue ? reservation.EndDate.Value : default(DateTime),
+                Status = reservation.Status,
+                Notes = reservation.Notes,
+                PriceTillNow = reservation.TotalPrice,
+                IsPrivate = reservation.IsPrivate,
+                Rooms = new RoomReadReservationDto
+                {
+                    Id = reservation.Rooms.ID,
+                    Name = reservation.Rooms.Name,
+                    Description = reservation.Rooms.Description
+                }
+            };
+            return ret;
+        }
+        public async Task<bool> DeleteTotalReservationAsync(int id)
+        {
+            var reservation = await _reservationRepository.GetByIdAsync(id);
+            if (reservation == null)
+            {
+                return false;
+            }
+
+            await _reservationRepository.DeleteByIdAsync(id);
+            await _reservationRepository.SaveAsync();
+            return true;
+        }
+        public async Task<bool> DeleteReservationAsync(int totalReservationId, int reservationId)
+        {
+            var totalReservation = _reservationRepository.getReservationsByid(totalReservationId);
+            if (totalReservation == null)
+            {
+                return false;
+            }
+
+            var reservation = totalReservation.Reservations.FirstOrDefault(r => r.Id == reservationId);
+            if (reservation == null)
+            {
+                return false;
+            }
+
+            totalReservation.Reservations.Remove(reservation);
+            await _reserveRepo.DeleteByIdAsync(reservationId);
+            await _reserveRepo.SaveAsync();
+            return true;
+        }
+
+    }
+}
 
 

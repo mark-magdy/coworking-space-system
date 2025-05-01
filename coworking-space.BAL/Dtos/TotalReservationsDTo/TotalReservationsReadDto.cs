@@ -9,17 +9,19 @@ namespace coworking_space.BAL.Dtos.TotalReservationsDTo
 {
     public class TotalReservationsReadDto
     {
-        public string description { get; set; }
+        public int Id { get; set; }
+        public string ?description { get; set; }
         public decimal totalPrice { get; set; }
-        public List<ReservationReadDto> reservations { get; set; }
+        public List<ReservationReadDto> ? reservations { get; set; }
 
     }
     public class ReservationReadDto
     {
+        public int Id { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public Status Status { get; set; }
-        public string Notes { get; set; } // e.g., "VIP guest", "Frequent customer"
+        public string? Notes { get; set; } // e.g., "VIP guest", "Frequent customer"
        
         public decimal PriceTillNow { get; set; } // e.g., price per hour for the reservation
        
@@ -29,6 +31,8 @@ namespace coworking_space.BAL.Dtos.TotalReservationsDTo
     }
     public class RoomReadReservationDto
     {
+
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     }

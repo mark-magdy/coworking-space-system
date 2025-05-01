@@ -16,34 +16,65 @@ namespace coworking_space.API.Controllers
         {
             _reservationService = reservationService;
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllTotalReservations()
+        {
+            try
+            {
+                var totalReservations = await _reservationService.GetAllTotalReservationsAsync();
+                if (totalReservations == null || !totalReservations.Any())
+                {
+                    return NotFound("No total reservations found.");
+                }
+                return Ok(totalReservations);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("{id}")]
-        public IActionResult GetTotalReservation(int id, [FromQuery] Status status)
+        public IActionResult GetTotalReservation(int id)//need to be asynchronous
         {
 
-            var dto = _reservationService.GetTotalReservations(id, status);
+            var dto = _reservationService.GetTotalReservations(id);
             if (dto == null)
             {
                 return NotFound();
             }
             return Ok(dto);
         }
-        [HttpPost("{id}")]
+
+        [HttpGet("{totalReservationId}/reservations/{reservationId}")]  //need to be asynchronous
+        public IActionResult GetReservation(int totalReservationId, int reservationId)
+        {
+            try
+            {
+                var reservation = _reservationService.GetReservationFromTotalReservation(totalReservationId, reservationId);
+                if (reservation == null)
+                {
+                    return NotFound("Reservation not found or does not belong to the specified total reservation.");
+                }
+                return Ok(reservation);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("{id}")] //need to be asynchronous
         public IActionResult AddReservation([FromBody] ReservationCreateDto dto, int id)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            
+
             try
             {
-               var reservation=_reservationService.AddReservation(dto, id);
-                return Created(string.Empty, new 
-                {
-                    SpecialRequests = reservation.SpecialRequests,
-                    Notes = reservation.Notes,
-                    IsPrivate = reservation.IsPrivate,
-                    RoomId = reservation.RoomId,
-                 
-                });
+                var reservation = _reservationService.AddReservation(dto, id);
+                return Created(string.Empty, reservation);
             }
             catch (Exception ex)
             {
@@ -52,25 +83,75 @@ namespace coworking_space.API.Controllers
 
 
 
-            
+
 
         }
         [HttpPost]
-        public async Task< IActionResult> MakeTotalReservation([FromBody] TotalReservationCreateDto dto)
+        public async Task<IActionResult> MakeTotalReservation([FromBody] TotalReservationCreateDto dto)
         {
-           if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             try
             {
-               var totalReservation= await _reservationService.MakeTotalReservation(dto);
+                var totalReservation = await _reservationService.MakeTotalReservation(dto);
                 return Created(string.Empty, totalReservation);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-          
 
+
+        }
+        [HttpPut("{id}")] //total reservation id 
+        public async Task< IActionResult> UpdateReservation(int id, [FromBody] ReservationUpdateDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            try
+            {
+                var reservation = await _reservationService.UpdateReservation(id, dto);
+                return Ok(reservation);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+        [HttpDelete("{id}")]//total reservation id
+        public async Task<IActionResult> DeleteTotalReservation(int id)
+        {
+            try
+            {
+                var isDeleted = await _reservationService.DeleteTotalReservationAsync(id);
+                if (!isDeleted)
+                {
+                    return NotFound("Total reservation not found.");
+                }
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpDelete("{totalReservationId}/reservations/{reservationId}")]
+        public async Task<IActionResult> DeleteReservation(int totalReservationId, int reservationId)
+        {
+            try
+            {
+                var isDeleted = await _reservationService.DeleteReservationAsync(totalReservationId, reservationId);
+                if (!isDeleted)
+                {
+                    return NotFound("Reservation not found or does not belong to the specified total reservation.");
+                }
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

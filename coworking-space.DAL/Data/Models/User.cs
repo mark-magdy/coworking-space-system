@@ -19,12 +19,12 @@ namespace CO_Working_Space
         [StringLength(100, ErrorMessage = "Password must be at least 6 characters long.", MinimumLength = 6)]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Confirm Password is required.")]
-        [DataType(DataType.Password)]
+        //[Required(ErrorMessage = "Confirm Password is required.")]
+        //[DataType(DataType.Password)]
 
-        [Compare("Password", ErrorMessage = "Passwords do not match.")]
+        //[Compare("Password", ErrorMessage = "Passwords do not match.")]
 
-        public string ConfirmPassword { get; set; }
+        //public string ConfirmPassword { get; set; }
 
         [Phone(ErrorMessage = "Invalid Phone Number.")]
         public string? PhoneNumber { get; set; }
@@ -32,15 +32,15 @@ namespace CO_Working_Space
         public string ? UniversityName { get; set; }
 
         public bool IsActive { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public DateTime UpdatedAt { get; set; } = DateTime.Now;
-        public string Role { get; set; } = "Client"; // Default role
+        public DateTime CreatedAt { get; set; } 
+        public DateTime UpdatedAt { get; set; } 
+        public string Role { get; set; } 
 
 
 
         // Navigation properties
-        public virtual ICollection<Order> Orders { get; set; } 
-        public virtual ICollection<TotalReservations> TotalReservations { get; set; }
+        public virtual ICollection<Order>? Orders { get; set; } 
+        public virtual ICollection<TotalReservations> ?TotalReservations { get; set; }
 
     }
 

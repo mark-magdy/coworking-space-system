@@ -25,7 +25,7 @@ namespace coworking_space.DAL.Repository.Implementations {
 
             return await query.ToListAsync();
         }
-        public async Task<T?> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
+        public  async Task<T?> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
         public async Task<T> AddAsync(T entity) {
             await _dbSet.AddAsync(entity);   // Add entity to DbSet
             return entity;  // Return the inserted entity (with any updated values, like the generated ID)
