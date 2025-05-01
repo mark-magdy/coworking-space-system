@@ -43,10 +43,7 @@ namespace coworking_space.DAL.Repository.Implementations {
     }
 
     // Implementations/RoomRepository.cs
-    public class RoomRepository : GenericRepository<Room>, IRoomRepository {
-        public RoomRepository(Context context) : base(context) { }
-    }
-
+    
     // Implementations/SuplierRepository.cs
     public class SuplierRepository : GenericRepository<Supplier>, ISuplierRepository {
         public SuplierRepository(Context context) : base(context) { }

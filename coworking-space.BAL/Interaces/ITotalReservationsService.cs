@@ -10,8 +10,14 @@ namespace coworking_space.BAL.Interaces
 {
     public interface ITotalReservationsService
     {
-        public TotalReservationsReadDto GetTotalReservations(int id, Status status);
-        public  ReservationOfRoom AddReservation(ReservationCreateDto reservationCreateDto,int id);
-        public  Task<TotalReservations> MakeTotalReservation(TotalReservationCreateDto totalReservationCreateDto);
+        public TotalReservationsReadDto? GetTotalReservations(int id);
+        public ReservationReadDto AddReservation(ReservationCreateDto reservationCreateDto,int id);
+        public Task<TotalReservationsReadDto> MakeTotalReservation(TotalReservationCreateDto totalReservationCreateDto);
+        public Task<ReservationReadDto> UpdateReservation(int id, ReservationUpdateDto reservationUpdateDto);
+        Task<bool> DeleteTotalReservationAsync(int id);
+        Task<bool> DeleteReservationAsync(int totalReservationId, int reservationId);
+        ReservationReadDto? GetReservationFromTotalReservation(int totalReservationId, int reservationId);
+        Task<List<TotalReservationsReadDto>> GetAllTotalReservationsAsync();
     }
 }
+
