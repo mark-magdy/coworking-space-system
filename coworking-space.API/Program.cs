@@ -5,6 +5,7 @@ using coworking_space.DAL.Data;
 using coworking_space.DAL.Repository.Implementations;
 using coworking_space.DAL.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
+
 namespace coworking_space.API
 {
     public class Program
@@ -54,7 +55,7 @@ namespace coworking_space.API
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseAuthorization(); 
 
 
             app.MapControllers();

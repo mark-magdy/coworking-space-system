@@ -4488,23 +4488,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kiro3\\.nuget\\packages\\": {},
+    "C:\\Users\\marka\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.API\\coworking-space.API.csproj",
+      "projectUniqueName": "D:\\courses\\DEPI Web\\gradProject\\coworking-space-system\\coworking-space.API\\coworking-space.API.csproj",
       "projectName": "coworking-space.API",
-      "projectPath": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.API\\coworking-space.API.csproj",
-      "packagesPath": "C:\\Users\\kiro3\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.API\\obj\\",
+      "projectPath": "D:\\courses\\DEPI Web\\gradProject\\coworking-space-system\\coworking-space.API\\coworking-space.API.csproj",
+      "packagesPath": "C:\\Users\\marka\\.nuget\\packages\\",
+      "outputPath": "D:\\courses\\DEPI Web\\gradProject\\coworking-space-system\\coworking-space.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\kiro3\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\marka\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4519,8 +4519,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.BAL\\coworking-space.BAL.csproj": {
-              "projectPath": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.BAL\\coworking-space.BAL.csproj"
+            "D:\\courses\\DEPI Web\\gradProject\\coworking-space-system\\coworking-space.BAL\\coworking-space.BAL.csproj": {
+              "projectPath": "D:\\courses\\DEPI Web\\gradProject\\coworking-space-system\\coworking-space.BAL\\coworking-space.BAL.csproj"
             }
           }
         }
@@ -4574,13 +4574,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Error occurred while getting package vulnerability data: The download of 'https://api.nuget.org/v3-vulnerabilities/2025.04.17.23.39.46/vulnerability.base.json' timed out because no data was received for 60000ms."
-    }
-  ]
+  }
 }
