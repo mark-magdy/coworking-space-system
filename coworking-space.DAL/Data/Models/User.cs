@@ -3,6 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CO_Working_Space
 {
+    public enum UserStatus
+    {
+        Active,
+        Inactive,
+        Suspended
+    }
 
     public class User
     {
@@ -18,6 +24,8 @@ namespace CO_Working_Space
         [DataType(DataType.Password)]
         [StringLength(100, ErrorMessage = "Password must be at least 6 characters long.", MinimumLength = 6)]
         public string Password { get; set; }
+        public string? Image { get; set; } // URL or path to the user's image
+        
 
         //[Required(ErrorMessage = "Confirm Password is required.")]
         //[DataType(DataType.Password)]
