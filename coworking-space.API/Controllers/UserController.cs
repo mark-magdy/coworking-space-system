@@ -36,7 +36,7 @@ namespace coworking_space.API.Controllers
         }
 
         // POST: api/User
-        [HttpPost]
+        [HttpPost] 
         public async Task<IActionResult> CreateUser([FromBody] UserCreateDto userCreateDto)
         {
             if (!ModelState.IsValid)

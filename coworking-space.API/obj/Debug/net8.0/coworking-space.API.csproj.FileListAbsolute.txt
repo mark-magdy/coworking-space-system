@@ -288,3 +288,4 @@ D:\courses\DEPI Web\gradProject\coworking-space-system\coworking-space.API\bin\D
 D:\courses\DEPI Web\gradProject\coworking-space-system\coworking-space.API\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\kiro3\OneDrive\Desktop\computer eng\DEPI\Co_working_Sapce\coworking-space.API\bin\Debug\net8.0\coworking-space.BAL.dll
 C:\Users\kiro3\OneDrive\Desktop\computer eng\DEPI\Co_working_Sapce\coworking-space.API\bin\Debug\net8.0\coworking-space.BAL.pdb
+D:\courses\DEPI Web\gradProject\coworking-space-system\coworking-space.API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
