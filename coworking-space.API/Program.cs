@@ -1,4 +1,5 @@
 
+using coworking_space.API.MappingProfiles;
 using coworking_space.BAL.Interaces;
 using coworking_space.BAL.Services;
 using coworking_space.DAL.Data;
@@ -9,7 +10,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace coworking_space.API {
+using AutoMapper;
+
+namespace coworking_space.API
+
+{
     public class Program {
         public static void Main(string[] args) {
             var builder = WebApplication.CreateBuilder(args);
@@ -56,7 +61,7 @@ namespace coworking_space.API {
 
             builder.Services.AddScoped<IAuthService, AuthService>();
             //-----------------------------------------
-
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
 
             builder.Services.AddAuthentication(options =>
             {
@@ -78,7 +83,7 @@ namespace coworking_space.API {
                     };
                 });
             builder.Services.AddAuthorization();
-
+          
 
             var app = builder.Build();
             app.UseCors("AllowReactApp");
