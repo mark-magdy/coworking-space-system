@@ -97,7 +97,9 @@ namespace coworking_space.API.Controllers
         [HttpGet("active")]
         public async Task<IActionResult> GetAllActiveUsers()
         {
-            var users = await _userService.GetAllUsersAsync();
+            var users = await _userService.GetAllactiveUsers();
+            if (users == null || users.Count == 0)
+                return NotFound("No active users found.");
             return Ok(users);
         }
 

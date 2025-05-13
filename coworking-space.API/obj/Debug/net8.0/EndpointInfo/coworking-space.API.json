@@ -780,6 +780,18 @@
           }
         }
       }
+    },
+    "/api/User/active": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1092,6 +1104,10 @@
             "nullable": true
           },
           "universityName": {
+            "type": "string",
+            "nullable": true
+          },
+          "image": {
             "type": "string",
             "nullable": true
           }

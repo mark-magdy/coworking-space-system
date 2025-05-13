@@ -2,10 +2,12 @@
 using coworking_space.BAL.Dtos.TotalReservationsDTo;
 using coworking_space.BAL.Dtos.UserDTO;
 using coworking_space.BAL.DTOs.OrderDTO;
+using coworking_space.BAL.DTOs.UserDTO;
 using coworking_space.BAL.Interaces;
 using coworking_space.DAL.Data.Models;
 using coworking_space.DAL.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using Microsoft.VisualBasic;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,10 +20,12 @@ namespace coworking_space.BAL.Services
         private readonly ITotalReservationsService _totalReservationsService;
         private readonly IOrderService _orderService;
 
-        public UserService(IUserRepository userRepository, ITotalReservationsService totalReservationsService)
+
+        public UserService(IUserRepository userRepository, ITotalReservationsService totalReservationsService, IOrderService orderService)
         {
             _userRepository = userRepository;
             _totalReservationsService = totalReservationsService;
+            _orderService = orderService;
         }
 
         public async Task<List<UserReadDto>> GetAllUsersAsync()
@@ -130,7 +134,7 @@ namespace coworking_space.BAL.Services
             var orders = new List<OrderReadDto>();
             foreach (var order in user.Orders)
             {
-                var ord=await _orderService.GetOrderByIdAsync(order.Id);
+                var ord = await _orderService.GetOrderByIdAsync(order.Id);
                 orders.Add(ord);
             }
             return orders;
@@ -139,7 +143,7 @@ namespace coworking_space.BAL.Services
         {
             var user = await _userRepository.GetUserWithReservations(id);
             if (user == null) return null;
-            if (user.TotalReservations == null ||! user.TotalReservations.Any()) return null;
+            if (user.TotalReservations == null || !user.TotalReservations.Any()) return null;
             List<TotalReservationsReadDto> reservations = new List<TotalReservationsReadDto>();
 
             //add firstly the paid total reservations
@@ -147,10 +151,35 @@ namespace coworking_space.BAL.Services
 
             foreach (var reservation in user.TotalReservations)
             {
-               reservations.Add(_totalReservationsService.GetTotalReservations(reservation.Id));
+                reservations.Add(_totalReservationsService.GetTotalReservations(reservation.Id));
             }
             return reservations;
         }
 
+        public async Task<List<ActiveUserDto>> GetAllactiveUsers()
+        {
+            var users = await _userRepository.GetAllActiveUsers();
+            return users.Select(static u =>
+                      {
+                          var reservation = u.TotalReservations.Where(t => t.Status == Status.Pending).FirstOrDefault();
+                          var start = reservation!=null?reservation.StartDate:default(DateTime);
+                          var _reservations = reservation!=null? reservation.Price:0;
+                          var order = u.Orders.Where(o => o.Order_Status == Status.Pending).FirstOrDefault();
+                          var   _orders= order!=null? order.TotalPrice:0;
+                          return new ActiveUserDto
+                          {
+                              id = u.Id,
+                              user = u.Name,
+                              date = start,
+                              time = (TimeSpan)(DateTime.Now - start),
+                              reservations = _reservations,
+                              orders=_orders,
+                              total = _reservations + _orders,
+                          };
+                      }).ToList();
+
+        } 
+
+      
     }
 }

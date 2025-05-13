@@ -454,6 +454,16 @@
   },
   {
     "ContainingType": "coworking_space.API.Controllers.UserController",
+    "Method": "GetAllActiveUsers",
+    "RelativePath": "api/User/active",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "coworking_space.API.Controllers.UserController",
     "Method": "GetOrdersByUserId",
     "RelativePath": "api/User/orders/{id}",
     "HttpMethod": "GET",

@@ -27,8 +27,8 @@ namespace coworking_space.DAL.Data.Models
         [Column(TypeName = "nvarchar(3)")]
         [DefaultValue("EGP")]
         public string Currency { get; set; } // e.g., USD, EUR
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public DateTime UpdatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } 
+        public DateTime UpdatedAt { get; set; }
         public bool IsRefunded { get; set; } = false; // Indicates if the payment has been refunded
         public DateTime? RefundDate { get; set; } // Date of refund if applicable
         // string RefundTransactionId { get; set; } // Unique identifier for the refund transaction

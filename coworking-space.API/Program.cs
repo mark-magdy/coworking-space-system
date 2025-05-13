@@ -11,7 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 using AutoMapper;
-
+//using AutoMapper.Extensions.Microsoft.DependencyInjection;
 namespace coworking_space.API
 
 {

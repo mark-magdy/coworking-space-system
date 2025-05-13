@@ -32,5 +32,14 @@ namespace coworking_space.DAL.Repository.Implementations
 
             return user ;
         }
+        public async Task<List<User>> GetAllActiveUsers()
+        {
+            var users = await _context.Users
+                .Where(u => u.IsActive)
+                .Include(u => u.Orders)
+                .Include(u => u.TotalReservations)
+                .ToListAsync();
+            return users;
+        }
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0fW5kQ+pMTM=",
+  "dgSpecHash": "NM4r6lH+aI0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\DEPI\\Co_working_Sapce\\coworking-space.BAL\\coworking-space.BAL.csproj",
+  "projectFilePath": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\coworking_space\\coworking-space.BAL\\coworking-space.BAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kiro3\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\kiro3\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
