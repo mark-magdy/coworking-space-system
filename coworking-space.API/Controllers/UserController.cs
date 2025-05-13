@@ -92,5 +92,17 @@ namespace coworking_space.API.Controllers
                 return NotFound("Reservations not found.");
             return Ok(reservations);
         }
+
+        // GET: api/User
+        [HttpGet("active")]
+        public async Task<IActionResult> GetAllActiveUsers()
+        {
+            var users = await _userService.GetAllactiveUsers();
+            if (users == null || users.Count == 0)
+                return NotFound("No active users found.");
+            return Ok(users);
+        }
+
+
     }
 }

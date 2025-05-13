@@ -13,5 +13,6 @@ namespace coworking_space.BAL.Dtos.UserDTO
         public bool IsActive { get; set; }
         public string Role { get; set; }
         public List<OrderReadDto>? Orders { get; set; } 
+
     }
 }

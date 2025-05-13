@@ -8,5 +8,6 @@ namespace coworking_space.DAL.Repository.Interfaces
         Task<User?> GetByEmailAsync(string email);
         public Task<User> GetUserWithOrders(int id);
         public Task<User> GetUserWithReservations(int id);
+        Task<List<User>> GetAllActiveUsers();
     }
 }
