@@ -1,4 +1,4 @@
-﻿using coworking_space.BAL.DTOs;
+﻿using coworking_space.BAL.DTOs.ProductDTO;
 using coworking_space.BAL.Interaces;
 using coworking_space.DAL.Data.Models;
 using coworking_space.DAL.Repository.Interfaces;
@@ -16,7 +16,7 @@ namespace coworking_space.BAL.Services {
             _productRepository = productRepository;
         }
 
-        public async Task<Product> AddProductAsync(CreateProductDto dto) {
+        public async Task<ProductReadDto> AddProductAsync(CreateProductDto dto) {
             var product = new Product
             {
                 Name = dto.Name,
@@ -28,13 +28,43 @@ namespace coworking_space.BAL.Services {
                 IsActive = true,
                 ImageUrl = dto.ImageUrl,
                 Category = dto.Category,
-                // Optionally: set IsAvailable based on Quantity
             };
 
-           return await _productRepository.AddAsync(product);
+            Product prd = await _productRepository.AddAsync(product);
+            var sbe = await _productRepository.SaveAsync();
+
+            return new ProductReadDto
+            {
+                Id = prd.Id,
+                Name = prd.Name,
+                Description = prd.Description,
+                Price = prd.Price,
+                Quantity = prd.Quantity,
+                CreatedAt = prd.CreatedAt,
+                UpdatedAt = prd.UpdatedAt,
+                IsActive = prd.IsActive,
+                ImageUrl = prd.ImageUrl,
+                Category = prd.Category
+            };
         }
-        public async Task<IEnumerable <Product>>GetProductsAsync() {
-            return await _productRepository.GetAllAsync();
+
+        public async Task<IEnumerable<ProductReadDto>> GetProductsAsync() {
+            var products = await _productRepository.GetAllAsync();
+
+            return products.Select(p => new ProductReadDto
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price,
+                Quantity = p.Quantity,
+                CreatedAt = p.CreatedAt,
+                UpdatedAt = p.UpdatedAt,
+                IsActive = p.IsActive,
+                ImageUrl = p.ImageUrl,
+                Category = p.Category
+            });
         }
+
     }
 }

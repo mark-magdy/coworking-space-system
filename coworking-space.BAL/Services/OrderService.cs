@@ -31,6 +31,7 @@ namespace coworking_space.BAL.Services {
                 OrderDetails = dto.OrderDetails,
                 UserId = dto.UserId,
                 OrderItems = new List<OrderItem>() // Ensure it's initialized
+
             };
 
             // Add items individually to the collection
