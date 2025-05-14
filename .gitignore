@@ -1,22 +1,69 @@
-# Visual Studio
+## Build results
+bin/
+obj/
+[Bb]uild/
+[Bb]uild[Ll]og.*
+*.dbmdl
+
+## Rider project files
+.idea/
+
+## VS Code
+.vscode/
+
+## Visual Studio
 .vs/
 *.user
 *.suo
-*.csproj.user
+*.userosscache
+*.sln.docstates
 
-# VS Code
-.vscode/
+## ASP.NET Core
+wwwroot/dist/
+wwwroot/node_modules/
 
-# Build artifacts
-**/bin/
-**/obj/
-**/Debug/
-*.dll
-*.exe
+## Node
+node_modules/
 
-# Logs
+## Logs
 *.log
+logs/
+*.tlog
 
-# Optional: ignore secrets (if you're committing config manually, keep these uncommented)
-# appsettings.json
-# appsettings.Development.json
+## Temporary files
+*.tmp
+*.temp
+*.bak
+*.old
+
+## DotCover
+*.dotCover
+
+## NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+
+## Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+## Test results
+TestResults/
+*.trx
+
+## Publish results
+publish/
+
+## Docker artifacts
+*.container
+*.dockerfile
+
+## Others
+.DS_Store
+Thumbs.db
+
+## Mac system files
+ehthumbs.db
