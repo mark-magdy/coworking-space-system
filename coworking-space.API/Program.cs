@@ -29,13 +29,21 @@ namespace coworking_space.API
                           .AllowAnyMethod();
                 });
             });
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+      .AddJsonOptions(options =>
+      {
+          options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+          options.JsonSerializerOptions.WriteIndented = true;
+      });
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddDbContext<Context>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+        b => b.MigrationsAssembly("coworking-space.DAL"))); 
+
 
 
 
@@ -58,6 +66,11 @@ namespace coworking_space.API
 
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+
+            builder.Services.AddScoped<IPaymentService, PaymentService>();
+            builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+
 
             builder.Services.AddScoped<IAuthService, AuthService>();
             //-----------------------------------------
