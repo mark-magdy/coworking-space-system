@@ -1,4 +1,5 @@
 ﻿using coworking_space.BAL.Dtos.TotalReservationsDTo;
+using coworking_space.BAL.DTOs.TotalReservationsDTo;
 using coworking_space.BAL.Interaces;
 using coworking_space.DAL.Data.Models;
 using coworking_space.DAL.Repository.Interfaces;
@@ -37,7 +38,7 @@ namespace coworking_space.BAL.Services
                 return new List<TotalReservationsReadDto>();
             }
             //the paid total reservations are not included in the list of total reservations
-            return totalReservations.Select(tr =>GetTotalReservations(tr.Id) ).ToList();//this for not paid total reservations
+            return totalReservations.Select(tr => GetTotalReservations(tr.Id)).ToList();//this for not paid total reservations
         }
         public TotalReservationsReadDto? GetTotalReservations(int id)//calculation of the current total reservation 
         {
@@ -58,12 +59,12 @@ namespace coworking_space.BAL.Services
             foreach (var reservation in totalReservation.Reservations)
             {
 
-                if (reservation.Status==Status.Completed) //ended but not paid 
+                if (reservation.Status == Status.Completed) //ended but not paid 
                 {
                     reservation.PriceTillNow = reservation.TotalPrice;
                     totalPrice += reservation.TotalPrice;
                 }
-                else if(reservation.Status==Status.Pending)
+                else if (reservation.Status == Status.Pending)
                 {
                     decimal price = 0;
                     if (reservation.IsPrivate)
@@ -151,16 +152,16 @@ namespace coworking_space.BAL.Services
 
         public ReservationReadDto AddReservation(ReservationCreateDto reservationCreateDto, int userId)
         {
-           
+
             var totalreservation = _reservationRepository.getReservationsByUserId(userId);
-            if (totalreservation == null|| reservationCreateDto.StartDate.Date!=DateTime.Today)
+            if (totalreservation == null || reservationCreateDto.StartDate.Date != DateTime.Today)
             {
                 TotalReservationsReadDto totalReservationDto = MakeTotalReservation(new TotalReservationCreateDto
                 {
                     UserId = userId,
-                  
+
                 }).Result;
-                totalreservation=new TotalReservations
+                totalreservation = new TotalReservations
                 {
                     Id = totalReservationDto.Id,
                     UserId = userId,
@@ -168,9 +169,9 @@ namespace coworking_space.BAL.Services
                     Price = 0,
                     StartDate = reservationCreateDto.StartDate,
                 };
-                
+
             }
-            if (totalreservation.Reservations!=null)
+            if (totalreservation.Reservations != null)
             {
                 foreach (var res in totalreservation.Reservations)
                 {
@@ -180,8 +181,8 @@ namespace coworking_space.BAL.Services
                     }
                 }
             }
-           
-            
+
+
             var reservation = new ReservationOfRoom
             {
                 StartDate = reservationCreateDto.StartDate, // Set to current date/time
@@ -208,7 +209,7 @@ namespace coworking_space.BAL.Services
 
                 _roomRepository.Update(room);
                 reservation.Rooms = room;
-                _reservationRepository.AddReservation(reservation,totalreservation.Id);
+                _reservationRepository.AddReservation(reservation, totalreservation.Id);
                 _reservationRepository.SaveAsync();
                 return new ReservationReadDto
                 {
@@ -243,7 +244,7 @@ namespace coworking_space.BAL.Services
                 Id = createdTotalReservation.Id,
                 description = createdTotalReservation.Description,
                 totalPrice = createdTotalReservation.Price,
-              
+
             };
 
         }
@@ -334,7 +335,7 @@ namespace coworking_space.BAL.Services
             _reserveRepo.Update(reservation);
             await _reserveRepo.SaveAsync();
 
-            var ret= new ReservationReadDto
+            var ret = new ReservationReadDto
             {
                 Id = reservation.Id,
                 StartDate = reservation.StartDate,
@@ -383,9 +384,42 @@ namespace coworking_space.BAL.Services
             await _reserveRepo.SaveAsync();
             return true;
         }
-      //  public async Task<List<ReservationReadDto>>
+        public async Task<List<UpcomingReservationReadDto>> GetllUpcomingReservations()
+        {
+            var upcomingReservations = await _reserveRepo.GetAllUpcomingReservationsWithRooms();
+            if (upcomingReservations == null || !upcomingReservations.Any())
+            {
+                return null;
+            }
 
+            //the paid total reservations are not included in the list of total reservations
+
+            return upcomingReservations.Select(tr => new UpcomingReservationReadDto
+            {
+                Id = tr.Id,
+                StartDate = tr.StartDate,
+                EndDate = tr.EndDate.HasValue ? tr.EndDate.Value : default(DateTime),
+                Notes = tr.Notes,
+             
+                Rooms = new RoomReadReservationDto
+                {
+                    Id = tr.Rooms.ID,
+                    Name = tr.Rooms.Name,
+                    Description = tr.Rooms.Description
+                },
+                Users = new UserUpcomingReservationReadDto
+                {
+                    Id = tr.TotalReservations.user.Id,
+                    Name = tr.TotalReservations.user.Name,
+                    Email = tr.TotalReservations.user.Email,
+                    PhoneNumber = tr.TotalReservations.user.PhoneNumber,
+                   
+                }
+            }).ToList();
+        }
     }
+      
+
 }
 
 

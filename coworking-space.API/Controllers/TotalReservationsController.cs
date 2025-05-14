@@ -156,23 +156,23 @@ namespace coworking_space.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        //[HttpGet("/upcoming")]
-        //public async Task<IActionResult> GetAllUpcomingReservations()
-        //{
-        //    try
-        //    {
-        //        var upcomingReservations = await _reservationService.GetAllTotalReservationsAsync();
-        //        if (totalReservations == null || !totalReservations.Any())
-        //        {
-        //            return NotFound("No total reservations found.");
-        //        }
-        //        return Ok(upcomingReservations);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
+        [HttpGet("/upcoming")]
+        public async Task<IActionResult> GetAllUpcomingReservations()
+        {
+            try
+            {
+                var upcomingReservations = await _reservationService.GetllUpcomingReservations();
+                if (upcomingReservations == null )
+                {
+                    return NotFound("No Upcoming Reservations.");
+                }
+                return Ok(upcomingReservations);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
-        //}
+        }
     }
 }
