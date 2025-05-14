@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using System.Formats.Asn1;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -382,6 +383,7 @@ namespace coworking_space.BAL.Services
             await _reserveRepo.SaveAsync();
             return true;
         }
+<<<<<<< HEAD
         public async Task<List<UpcomingReservationReadIDDto>> GetUpcomingReservationsAsync(int roomId)
         {
             var reservations = await _reserveRepo.GetUpcomingReservationsWithUserAsync(roomId);
@@ -395,6 +397,9 @@ namespace coworking_space.BAL.Services
             }).ToList();
         }
 
+=======
+      //  public async Task<List<ReservationReadDto>>
+>>>>>>> e5e90fc9b69fa1aa35122ce4d2a516bb67f85337
 
     }
 }
