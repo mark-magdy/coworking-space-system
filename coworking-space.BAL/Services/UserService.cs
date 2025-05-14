@@ -20,8 +20,12 @@ namespace coworking_space.BAL.Services
         private readonly ITotalReservationsService _totalReservationsService;
         private readonly IOrderService _orderService;
 
+<<<<<<< HEAD
+        public UserService(IUserRepository userRepository, ITotalReservationsService totalReservationsService,IOrderService orderService)
+=======
 
         public UserService(IUserRepository userRepository, ITotalReservationsService totalReservationsService, IOrderService orderService)
+>>>>>>> 920eff87a10e177f8f3026017ed45219beaf4333
         {
             _userRepository = userRepository;
             _totalReservationsService = totalReservationsService;
@@ -132,6 +136,7 @@ namespace coworking_space.BAL.Services
             if (user == null) return null;
             if (user.Orders == null || !user.Orders.Any()) return null;
             var orders = new List<OrderReadDto>();
+            var userOrders = user.Orders.ToList();
             foreach (var order in user.Orders)
             {
                 var ord = await _orderService.GetOrderByIdAsync(order.Id);

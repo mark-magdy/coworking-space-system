@@ -120,7 +120,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "coworking_space.BAL.DTOs.CreateProductDto",
+        "Type": "coworking_space.BAL.DTOs.ProductDTO.CreateProductDto",
         "IsRequired": true
       }
     ],

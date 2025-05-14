@@ -26,5 +26,11 @@ namespace coworking_space.DAL.Repository.Implementations {
 
             return await query.ToListAsync();
         }
+        //public async Task<Order?> GetByIdAsync(int id) {
+        //    return await _context.Orders
+        //        .Include(o => o.OrderItems)
+        //        .Include(o => o.User) // optional
+        //        .FirstOrDefaultAsync(o => o.Id == id);
+        //}
     }
 }

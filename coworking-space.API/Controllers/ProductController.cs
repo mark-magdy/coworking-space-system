@@ -1,10 +1,9 @@
-﻿using coworking_space.BAL.DTOs;
+﻿using coworking_space.BAL.DTOs.ProductDTO;
 using coworking_space.BAL.Interaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace coworking_space.API.Controllers
-{
+namespace coworking_space.API.Controllers {
     [ApiController]
     [Route("api/[controller]")]
     public class ProductsController : ControllerBase
