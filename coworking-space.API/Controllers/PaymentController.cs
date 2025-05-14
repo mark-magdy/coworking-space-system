@@ -26,7 +26,7 @@ namespace coworking_space.API
 
             try
             {
-                await _paymentService.ProcessPaymentAsync(dto); // You no longer need the returned payment
+                await _paymentService.ProcessPaymentAsync(dto);
 
                 return Ok(new
                 {

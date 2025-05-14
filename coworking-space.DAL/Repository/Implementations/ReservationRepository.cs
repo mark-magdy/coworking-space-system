@@ -22,6 +22,14 @@ namespace coworking_space.DAL.Repository.Implementations
                     .ThenInclude(tr => tr.user)
                 .ToListAsync();
         }
-       
+        public async Task<List<ReservationOfRoom>> GetUpcomingReservationsWithUserAsync(int roomId)
+        {
+            return await _context.ReservationOfRooms
+                .Include(r => r.TotalReservations)
+                    .ThenInclude(tr => tr.user)
+                .Where(r => r.RoomId == roomId && r.StartDate > DateTime.Now)
+                .ToListAsync();
+        }
+
     }
 }

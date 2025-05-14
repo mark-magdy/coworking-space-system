@@ -157,14 +157,28 @@ namespace coworking_space.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
-<<<<<<< HEAD
+
         [HttpGet("{roomId}/upcoming-reservations")]
         public async Task<IActionResult> GetUpcomingReservations(int roomId)
         {
-            var reservations = await _reservationService.GetUpcomingReservationsAsync(roomId);
-            return Ok(reservations);
+            try
+            {
+                var reservations = await _reservationService.GetUpcomingReservationsAsync(roomId);
+
+                if (reservations == null || !reservations.Any())
+                {
+                    return NotFound($"No upcoming reservations found for room ID {roomId}.");
+                }
+
+                return Ok(reservations);
+            }
+            catch (Exception ex)
+            {
+                // Optionally log the exception
+                return StatusCode(500, $"An error occurred while retrieving reservations: {ex.Message}");
+            }
         }
-=======
+
         //[HttpGet("/upcoming")]
         //public async Task<IActionResult> GetAllUpcomingReservations()
         //{
@@ -183,6 +197,6 @@ namespace coworking_space.API.Controllers
         //    }
 
         //}
->>>>>>> e5e90fc9b69fa1aa35122ce4d2a516bb67f85337
+
     }
 }

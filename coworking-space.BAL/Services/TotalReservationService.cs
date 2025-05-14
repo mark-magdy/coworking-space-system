@@ -383,23 +383,20 @@ namespace coworking_space.BAL.Services
             await _reserveRepo.SaveAsync();
             return true;
         }
-<<<<<<< HEAD
         public async Task<List<UpcomingReservationReadIDDto>> GetUpcomingReservationsAsync(int roomId)
         {
             var reservations = await _reserveRepo.GetUpcomingReservationsWithUserAsync(roomId);
 
             return reservations.Select(r => new UpcomingReservationReadIDDto
             {
-                UserName = r.TotalReservation.user.Name,
+                UserName = r.TotalReservations.user.Name,
                 StartDate = r.StartDate,
-                EndDate = r.EndDate
-                
+                EndDate = r.EndDate.HasValue ? r.EndDate.Value : default(DateTime)
+
             }).ToList();
         }
 
-=======
-      //  public async Task<List<ReservationReadDto>>
->>>>>>> e5e90fc9b69fa1aa35122ce4d2a516bb67f85337
+
 
     }
 }
