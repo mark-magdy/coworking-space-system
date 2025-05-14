@@ -493,5 +493,15 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "coworking_space.API.Controllers.TotalReservationsController",
+    "Method": "GetAllUpcomingReservations",
+    "RelativePath": "upcoming",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   }
 ]

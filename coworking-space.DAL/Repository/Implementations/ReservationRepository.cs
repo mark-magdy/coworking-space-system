@@ -16,7 +16,7 @@ namespace coworking_space.DAL.Repository.Implementations
 
         public async Task<List<ReservationOfRoom?>> GetAllUpcomingReservationsWithRooms()
         {
-            return await _context.ReservationOfRooms.Where(r => r.StartDate > DateTime.Now)
+            return await _context.ReservationOfRooms.Where(r => r.StartDate > DateTime.Now&& r.Status==Status.Pending)
                 .Include(r => r.Rooms)
                  .Include(r => r.TotalReservations)
                     .ThenInclude(tr => tr.user)
