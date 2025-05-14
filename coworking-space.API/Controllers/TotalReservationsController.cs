@@ -1,5 +1,6 @@
 ﻿using coworking_space.BAL.Dtos.TotalReservationsDTo;
 using coworking_space.BAL.Interaces;
+using coworking_space.BAL.Services;
 using coworking_space.DAL.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -155,6 +156,12 @@ namespace coworking_space.API.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+        [HttpGet("{roomId}/upcoming-reservations")]
+        public async Task<IActionResult> GetUpcomingReservations(int roomId)
+        {
+            var reservations = await _reservationService.GetUpcomingReservationsAsync(roomId);
+            return Ok(reservations);
         }
     }
 }
