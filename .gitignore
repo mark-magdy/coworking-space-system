@@ -1,8 +1,11 @@
-.vs
 # Visual Studio
 .vs/
 *.user
 *.suo
+*.csproj.user
+
+# VS Code
+.vscode/
 
 # Build artifacts
 **/bin/
@@ -14,10 +17,6 @@
 # Logs
 *.log
 
-# Sensitive files
+# Optional: ignore secrets (if you're committing config manually, keep these uncommented)
 # appsettings.json
 # appsettings.Development.json
-
-# IDE settings
-.vscode/
-*.csproj.user

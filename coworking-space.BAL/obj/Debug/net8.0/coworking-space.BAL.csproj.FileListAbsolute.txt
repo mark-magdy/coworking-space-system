@@ -46,6 +46,7 @@ C:\Users\kiro3\OneDrive\Desktop\computer eng\coworking_space\coworking-space.BAL
 C:\Users\kiro3\OneDrive\Desktop\computer eng\coworking_space\coworking-space.BAL\obj\Debug\net8.0\refint\coworking-space.BAL.dll
 C:\Users\kiro3\OneDrive\Desktop\computer eng\coworking_space\coworking-space.BAL\obj\Debug\net8.0\coworking-space.BAL.pdb
 C:\Users\kiro3\OneDrive\Desktop\computer eng\coworking_space\coworking-space.BAL\obj\Debug\net8.0\ref\coworking-space.BAL.dll
+<<<<<<< HEAD
 C:\Users\Jessica\Desktop\jessycotrial\coworking-space.BAL\obj\Debug\net8.0\coworking-space.BAL.csproj.AssemblyReference.cache
 C:\Users\Jessica\Desktop\jessycotrial\coworking-space.BAL\obj\Debug\net8.0\coworking-space.BAL.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Jessica\Desktop\jessycotrial\coworking-space.BAL\obj\Debug\net8.0\coworking-space.BAL.AssemblyInfoInputs.cache
@@ -62,3 +63,21 @@ C:\Users\Jessica\Desktop\jessycotrial\coworking-space.BAL\bin\Debug\net8.0\cowor
 C:\Users\Jessica\Desktop\jessycotrial\coworking-space.BAL\bin\Debug\net8.0\coworking-space.DAL.pdb
 C:\Users\Jessica\Desktop\jessycotrial\coworking-space.BAL\obj\Debug\net8.0\coworkin.A8DA466C.Up2Date
 C:\Users\Jessica\Desktop\jessycotrial\coworking-space.BAL\obj\Debug\net8.0\ref\coworking-space.BAL.dll
+=======
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.BAL\bin\Debug\net8.0\coworking-space.BAL.deps.json
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.BAL\bin\Debug\net8.0\coworking-space.BAL.dll
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.BAL\bin\Debug\net8.0\coworking-space.BAL.pdb
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.BAL\bin\Debug\net8.0\coworking-space.DAL.dll
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.BAL\bin\Debug\net8.0\coworking-space.DAL.pdb
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.BAL\obj\Debug\net8.0\coworking-space.BAL.csproj.AssemblyReference.cache
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.BAL\obj\Debug\net8.0\coworking-space.BAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.BAL\obj\Debug\net8.0\coworking-space.BAL.AssemblyInfoInputs.cache
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.BAL\obj\Debug\net8.0\coworking-space.BAL.AssemblyInfo.cs
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.BAL\obj\Debug\net8.0\coworking-space.BAL.csproj.CoreCompileInputs.cache
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.BAL\obj\Debug\net8.0\coworking-space.BAL.sourcelink.json
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.BAL\obj\Debug\net8.0\coworkin.A8DA466C.Up2Date
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.BAL\obj\Debug\net8.0\coworking-space.BAL.dll
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.BAL\obj\Debug\net8.0\refint\coworking-space.BAL.dll
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.BAL\obj\Debug\net8.0\coworking-space.BAL.pdb
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.BAL\obj\Debug\net8.0\ref\coworking-space.BAL.dll
+>>>>>>> 67421e40e20326a76cc4f0b5d4cb26f010301cc2

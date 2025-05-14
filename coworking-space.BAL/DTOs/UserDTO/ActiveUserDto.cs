@@ -17,6 +17,7 @@ namespace coworking_space.BAL.DTOs.UserDTO
         public decimal ?orders { get; set; }
      
         public decimal total { get; set; }
+    
     }
 //    id: 3,
 //      user: 'Michael Brown',

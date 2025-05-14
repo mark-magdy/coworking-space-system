@@ -259,49 +259,12 @@
   },
   {
     "ContainingType": "coworking_space.API.Controllers.TotalReservationsController",
-    "Method": "MakeTotalReservation",
-    "RelativePath": "api/TotalReservations",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "coworking_space.BAL.Dtos.TotalReservationsDTo.TotalReservationCreateDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "coworking_space.API.Controllers.TotalReservationsController",
     "Method": "GetTotalReservation",
     "RelativePath": "api/TotalReservations/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "coworking_space.API.Controllers.TotalReservationsController",
-    "Method": "AddReservation",
-    "RelativePath": "api/TotalReservations/{id}",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "coworking_space.BAL.Dtos.TotalReservationsDTo.ReservationCreateDto",
-        "IsRequired": true
-      },
       {
         "Name": "id",
         "Type": "System.Int32",
@@ -383,6 +346,27 @@
       },
       {
         "Name": "reservationId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "coworking_space.API.Controllers.TotalReservationsController",
+    "Method": "AddReservation",
+    "RelativePath": "api/TotalReservations/{userId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "coworking_space.BAL.Dtos.TotalReservationsDTo.ReservationCreateDto",
+        "IsRequired": true
+      },
+      {
+        "Name": "userId",
         "Type": "System.Int32",
         "IsRequired": true
       }

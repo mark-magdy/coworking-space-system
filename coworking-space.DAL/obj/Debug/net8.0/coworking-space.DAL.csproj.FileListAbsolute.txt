@@ -43,6 +43,7 @@ C:\Users\kiro3\OneDrive\Desktop\computer eng\coworking_space\coworking-space.DAL
 C:\Users\kiro3\OneDrive\Desktop\computer eng\coworking_space\coworking-space.DAL\obj\Debug\net8.0\coworking-space.DAL.pdb
 C:\Users\kiro3\OneDrive\Desktop\computer eng\coworking_space\coworking-space.DAL\obj\Debug\net8.0\coworking-space.DAL.genruntimeconfig.cache
 C:\Users\kiro3\OneDrive\Desktop\computer eng\coworking_space\coworking-space.DAL\obj\Debug\net8.0\ref\coworking-space.DAL.dll
+<<<<<<< HEAD
 C:\Users\Jessica\Desktop\jessycotrial\coworking-space.DAL\bin\Debug\net8.0\coworking-space.DAL.deps.json
 C:\Users\Jessica\Desktop\jessycotrial\coworking-space.DAL\bin\Debug\net8.0\coworking-space.DAL.runtimeconfig.json
 C:\Users\Jessica\Desktop\jessycotrial\coworking-space.DAL\bin\Debug\net8.0\coworking-space.DAL.dll
@@ -58,3 +59,20 @@ C:\Users\Jessica\Desktop\jessycotrial\coworking-space.DAL\obj\Debug\net8.0\refin
 C:\Users\Jessica\Desktop\jessycotrial\coworking-space.DAL\obj\Debug\net8.0\coworking-space.DAL.pdb
 C:\Users\Jessica\Desktop\jessycotrial\coworking-space.DAL\obj\Debug\net8.0\coworking-space.DAL.genruntimeconfig.cache
 C:\Users\Jessica\Desktop\jessycotrial\coworking-space.DAL\obj\Debug\net8.0\ref\coworking-space.DAL.dll
+=======
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.DAL\bin\Debug\net8.0\coworking-space.DAL.deps.json
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.DAL\bin\Debug\net8.0\coworking-space.DAL.runtimeconfig.json
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.DAL\bin\Debug\net8.0\coworking-space.DAL.dll
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.DAL\bin\Debug\net8.0\coworking-space.DAL.pdb
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.DAL\obj\Debug\net8.0\coworking-space.DAL.csproj.AssemblyReference.cache
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.DAL\obj\Debug\net8.0\coworking-space.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.DAL\obj\Debug\net8.0\coworking-space.DAL.AssemblyInfoInputs.cache
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.DAL\obj\Debug\net8.0\coworking-space.DAL.AssemblyInfo.cs
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.DAL\obj\Debug\net8.0\coworking-space.DAL.csproj.CoreCompileInputs.cache
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.DAL\obj\Debug\net8.0\coworking-space.DAL.sourcelink.json
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.DAL\obj\Debug\net8.0\coworking-space.DAL.dll
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.DAL\obj\Debug\net8.0\refint\coworking-space.DAL.dll
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.DAL\obj\Debug\net8.0\coworking-space.DAL.pdb
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.DAL\obj\Debug\net8.0\coworking-space.DAL.genruntimeconfig.cache
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.DAL\obj\Debug\net8.0\ref\coworking-space.DAL.dll
+>>>>>>> 67421e40e20326a76cc4f0b5d4cb26f010301cc2

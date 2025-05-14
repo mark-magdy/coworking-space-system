@@ -21,7 +21,11 @@ namespace coworking_space.BAL.Services
         private readonly IOrderService _orderService;
 
 
+<<<<<<< HEAD
         public UserService(IUserRepository userRepository, ITotalReservationsService totalReservationsService,IOrderService orderService)
+=======
+        public UserService(IUserRepository userRepository, ITotalReservationsService totalReservationsService, IOrderService orderService)
+>>>>>>> 67421e40e20326a76cc4f0b5d4cb26f010301cc2
 
         {
             _userRepository = userRepository;

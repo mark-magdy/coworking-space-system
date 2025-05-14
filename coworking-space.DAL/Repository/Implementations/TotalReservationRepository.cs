@@ -42,6 +42,13 @@ namespace coworking_space.DAL.Repository.Implementations
             }
 
         }
+        public TotalReservations getReservationsByUserId(int userId)//return active reservations of today which is not paid
+        {
+            return _context.TotalReservations.Where(tr => tr.UserId == userId&&tr.Status == Status.Pending&&tr.StartDate.Date==DateTime.Today)
+                .Include(tr => tr.Reservations)
+                    .ThenInclude(r => r.Rooms)
+                .FirstOrDefault();
 
+        }
     }
 }

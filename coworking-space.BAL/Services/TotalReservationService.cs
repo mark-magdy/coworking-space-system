@@ -19,6 +19,7 @@ namespace coworking_space.BAL.Services
         private readonly IRoomRepository _roomRepository;
         private readonly IReservationsRepository _reserveRepo;
 
+
         const decimal pricePerHourShared = 10; // Example price per hour
         public TotalReservationService(ITotalReservationsRepository reservationRepository, IRoomRepository roomRepository, IReservationsRepository reservrepo)
         {
@@ -147,10 +148,28 @@ namespace coworking_space.BAL.Services
             };
         }
 
-        public ReservationReadDto AddReservation(ReservationCreateDto reservationCreateDto, int id)
+        public ReservationReadDto AddReservation(ReservationCreateDto reservationCreateDto, int userId)
         {
-            var totalreservation = _reservationRepository.getReservationsByid(id);
-            if (totalreservation.Reservations.Any())
+           
+            var totalreservation = _reservationRepository.getReservationsByUserId(userId);
+            if (totalreservation == null|| reservationCreateDto.StartDate.Date!=DateTime.Today)
+            {
+                TotalReservationsReadDto totalReservationDto = MakeTotalReservation(new TotalReservationCreateDto
+                {
+                    UserId = userId,
+                  
+                }).Result;
+                totalreservation=new TotalReservations
+                {
+                    Id = totalReservationDto.Id,
+                    UserId = userId,
+                    Description = totalReservationDto.description,
+                    Price = 0,
+                    StartDate = reservationCreateDto.StartDate,
+                };
+                
+            }
+            if (totalreservation.Reservations!=null)
             {
                 foreach (var res in totalreservation.Reservations)
                 {
@@ -160,9 +179,11 @@ namespace coworking_space.BAL.Services
                     }
                 }
             }
+           
+            
             var reservation = new ReservationOfRoom
             {
-                StartDate = DateTime.Now, // Set to current date/time
+                StartDate = reservationCreateDto.StartDate, // Set to current date/time
 
 
                 Status = Status.Pending, // Set to a default status
@@ -186,7 +207,8 @@ namespace coworking_space.BAL.Services
 
                 _roomRepository.Update(room);
                 reservation.Rooms = room;
-                _reservationRepository.AddReservation(reservation, id);
+                _reservationRepository.AddReservation(reservation,totalreservation.Id);
+                _reservationRepository.SaveAsync();
                 return new ReservationReadDto
                 {
                     Id = reservation.Id,
