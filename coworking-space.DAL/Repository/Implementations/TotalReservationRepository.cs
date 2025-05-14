@@ -20,6 +20,12 @@ namespace coworking_space.DAL.Repository.Implementations
            .ThenInclude(r => r.Rooms)
        .FirstOrDefault(tr => tr.Id == id);
         }
+        public async Task<TotalReservations?> GetByIdWithReservationsAsync(int id)
+        {
+            return await _context.TotalReservations
+                .Include(tr => tr.Reservations)
+                .FirstOrDefaultAsync(tr => tr.Id == id);
+        }
         public void AddReservation(ReservationOfRoom reservation, int id)
         {
             var totalReservation = _context.TotalReservations

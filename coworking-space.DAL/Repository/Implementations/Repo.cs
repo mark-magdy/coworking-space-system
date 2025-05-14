@@ -28,9 +28,9 @@ namespace coworking_space.DAL.Repository.Implementations {
     }
 
     // Implementations/PaymentRepository.cs
-    public class PaymentRepository : GenericRepository<Payment>, IPaymentRepository {
-        public PaymentRepository(Context context) : base(context) { }
-    }
+    //public class PaymentRepository : GenericRepository<Payment>, IPaymentRepository {
+    //    public PaymentRepository(Context context) : base(context) { }
+    //}
 
     // Implementations/PurchasedItemRepository.cs
     //public class PurchasedItemRepository : GenericRepository<PurchasedItem>, IPurchasedItemRepository {

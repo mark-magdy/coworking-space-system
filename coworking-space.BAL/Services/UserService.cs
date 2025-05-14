@@ -21,7 +21,9 @@ namespace coworking_space.BAL.Services
         private readonly IOrderService _orderService;
 
 
-        public UserService(IUserRepository userRepository, ITotalReservationsService totalReservationsService, IOrderService orderService)
+
+        public UserService(IUserRepository userRepository, ITotalReservationsService totalReservationsService,IOrderService orderService)
+
 
         {
             _userRepository = userRepository;
