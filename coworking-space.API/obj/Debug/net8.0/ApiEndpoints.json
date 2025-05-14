@@ -312,6 +312,22 @@
   },
   {
     "ContainingType": "coworking_space.API.Controllers.TotalReservationsController",
+    "Method": "GetUpcomingReservations",
+    "RelativePath": "api/TotalReservations/{roomId}/upcoming-reservations",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "coworking_space.API.Controllers.TotalReservationsController",
     "Method": "GetReservation",
     "RelativePath": "api/TotalReservations/{totalReservationId}/reservations/{reservationId}",
     "HttpMethod": "GET",

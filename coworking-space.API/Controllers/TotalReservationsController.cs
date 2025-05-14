@@ -157,7 +157,7 @@ namespace coworking_space.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
-<<<<<<< HEAD
+
 
         [HttpGet("{roomId}/upcoming-reservations")]
         public async Task<IActionResult> GetUpcomingReservations(int roomId)
@@ -199,7 +199,7 @@ namespace coworking_space.API.Controllers
 
         //}
 
-=======
+
         [HttpGet("/upcoming")]
         public async Task<IActionResult> GetAllUpcomingReservations()
         {
@@ -218,6 +218,6 @@ namespace coworking_space.API.Controllers
             }
 
         }
->>>>>>> e76876c3469b89bfdfc315c1bccbcde64019e858
+
     }
 }

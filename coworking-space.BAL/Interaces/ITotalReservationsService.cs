@@ -19,11 +19,11 @@ namespace coworking_space.BAL.Interaces
         Task<bool> DeleteReservationAsync(int totalReservationId, int reservationId);
         ReservationReadDto? GetReservationFromTotalReservation(int totalReservationId, int reservationId);
         Task<List<TotalReservationsReadDto>> GetAllTotalReservationsAsync();
-<<<<<<< HEAD
+
         Task<List<UpcomingReservationReadIDDto>> GetUpcomingReservationsAsync(int roomId);
-=======
+
         public Task<List<UpcomingReservationReadDto>> GetllUpcomingReservations();
->>>>>>> e76876c3469b89bfdfc315c1bccbcde64019e858
+
     }
 }
 

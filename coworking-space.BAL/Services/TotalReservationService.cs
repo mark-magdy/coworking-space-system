@@ -384,10 +384,14 @@ namespace coworking_space.BAL.Services
             await _reserveRepo.SaveAsync();
             return true;
         }
-<<<<<<< HEAD
+
         public async Task<List<UpcomingReservationReadIDDto>> GetUpcomingReservationsAsync(int roomId)
         {
             var reservations = await _reserveRepo.GetUpcomingReservationsWithUserAsync(roomId);
+            if (reservations == null || !reservations.Any())
+            {
+                return null;
+            }
 
             return reservations.Select(r => new UpcomingReservationReadIDDto
             {
@@ -399,7 +403,7 @@ namespace coworking_space.BAL.Services
         }
 
 
-=======
+
         public async Task<List<UpcomingReservationReadDto>> GetllUpcomingReservations()
         {
             var upcomingReservations = await _reserveRepo.GetAllUpcomingReservationsWithRooms();
@@ -407,7 +411,7 @@ namespace coworking_space.BAL.Services
             {
                 return null;
             }
->>>>>>> e76876c3469b89bfdfc315c1bccbcde64019e858
+
 
             //the paid total reservations are not included in the list of total reservations
 
