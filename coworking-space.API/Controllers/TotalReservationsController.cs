@@ -107,7 +107,7 @@ namespace coworking_space.API.Controllers
         //}
 
         [HttpPut("{id}")] //total reservation id 
-        public async Task< IActionResult> UpdateReservation(int id, [FromBody] ReservationUpdateDto dto)
+        public async Task<IActionResult> UpdateReservation(int id, [FromBody] ReservationUpdateDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -156,5 +156,23 @@ namespace coworking_space.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        //[HttpGet("/upcoming")]
+        //public async Task<IActionResult> GetAllUpcomingReservations()
+        //{
+        //    try
+        //    {
+        //        var upcomingReservations = await _reservationService.GetAllTotalReservationsAsync();
+        //        if (totalReservations == null || !totalReservations.Any())
+        //        {
+        //            return NotFound("No total reservations found.");
+        //        }
+        //        return Ok(upcomingReservations);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+
+        //}
     }
 }

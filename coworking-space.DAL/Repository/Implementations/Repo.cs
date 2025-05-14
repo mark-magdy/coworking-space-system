@@ -38,9 +38,7 @@ namespace coworking_space.DAL.Repository.Implementations {
     //}
 
     // Implementations/ReservationsRepository.cs
-    public class ReservationsRepository : GenericRepository<ReservationOfRoom>, IReservationsRepository {
-        public ReservationsRepository(Context context) : base(context) { }
-    }
+  
 
     // Implementations/RoomRepository.cs
     
