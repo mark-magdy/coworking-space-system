@@ -65,15 +65,15 @@ namespace coworking_space.API.Controllers
             }
         }
 
-        [HttpPost("{id}")] //need to be asynchronous
-        public IActionResult AddReservation([FromBody] ReservationCreateDto dto, int id)
+        [HttpPost("{userId}")] //need to be asynchronous
+        public IActionResult AddReservation([FromBody] ReservationCreateDto dto, int userId)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                var reservation = _reservationService.AddReservation(dto, id);
+                var reservation = _reservationService.AddReservation(dto, userId);
                 return Created(string.Empty, reservation);
             }
             catch (Exception ex)
@@ -86,23 +86,26 @@ namespace coworking_space.API.Controllers
 
 
         }
-        [HttpPost]
-        public async Task<IActionResult> MakeTotalReservation([FromBody] TotalReservationCreateDto dto)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            try
-            {
-                var totalReservation = await _reservationService.MakeTotalReservation(dto);
-                return Created(string.Empty, totalReservation);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
 
 
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> MakeTotalReservation([FromBody] TotalReservationCreateDto dto)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return BadRequest(ModelState);
+        //    try
+        //    {
+        //        var totalReservation = await _reservationService.MakeTotalReservation(dto);
+        //        return Created(string.Empty, totalReservation);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+
+
+        //}
+
         [HttpPut("{id}")] //total reservation id 
         public async Task< IActionResult> UpdateReservation(int id, [FromBody] ReservationUpdateDto dto)
         {

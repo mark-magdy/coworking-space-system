@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "G1bTGErx7Jc=",
+  "dgSpecHash": "DHOyStCMSNE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\coworking_space\\coworking-space.API\\coworking-space.API.csproj",
+  "projectFilePath": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\coworkingSpace\\coworking_space\\coworking-space.API\\coworking-space.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kiro3\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\kiro3\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
