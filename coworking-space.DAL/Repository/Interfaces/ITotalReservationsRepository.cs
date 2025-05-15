@@ -14,7 +14,7 @@ namespace coworking_space.DAL.Repository.Interfaces
         public void AddReservation(ReservationOfRoom reservation, int id);
         Task<TotalReservations?> GetByIdWithReservationsAsync(int id);
 
-        public TotalReservations getReservationsByUserId(int userId);
+        public TotalReservations getReservationsByUserId(string userId);
       
        
 

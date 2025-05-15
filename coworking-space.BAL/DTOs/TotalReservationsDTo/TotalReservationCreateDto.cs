@@ -10,7 +10,7 @@ namespace coworking_space.BAL.Dtos.TotalReservationsDTo
     public class TotalReservationCreateDto
     {
         
-        public int UserId { get; set; }
+        public string UserId { get; set; }
     }
     public class ReservationCreateDto
     {

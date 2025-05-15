@@ -2,7 +2,9 @@
 using coworking_space.BAL.Dtos.UserDTO;
 using coworking_space.BAL.Interaces;
 using coworking_space.DAL.Repository.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -16,53 +18,82 @@ namespace coworking_space.BAL.Services {
     public class AuthService : IAuthService {
         private readonly IConfiguration _config;
         private readonly IUserRepository _userRepository;
-
-        public AuthService(IConfiguration config, IUserRepository userRepository) {
+        private readonly UserManager<User> _userManager;
+        public AuthService(IConfiguration config, IUserRepository userRepository, UserManager<User>userManager) {
             _config = config;
             _userRepository = userRepository;
+            _userManager = userManager;
         }
 
         public async Task<string?> LoginAsync(string email, string password) {
-            var user = await _userRepository.GetByEmailAsync(email);
+            var user = await _userManager.FindByEmailAsync(email);
             //return user.Name;
-            if (user == null || !VerifyPassword(password, user.Password))
+            if (user == null )
                 return null;
+            var check = await _userManager.CheckPasswordAsync(user, password);
+            if (!check)
+                return null;
+
 
             return GenerateJwtToken(user);
         }
 
         public async Task<string?> RegisterAsync(UserCreateDto dto) {
-            var existing = await _userRepository.GetByEmailAsync(dto.Email);
-            if (existing != null)
-                return null;
+            //var existing = await _userRepository.GetByEmailAsync(dto.Email);
+            //if (existing != null)
+            //    return null;
 
+            //var user = new User
+            //{
+            //    Name = dto.Name,
+            //    Email = dto.Email,
+            //    Password = HashPassword(dto.Password),
+            //    PhoneNumber = dto.PhoneNumber,
+            //    UniversityName = dto.UniversityName,
+            //    IsActive = true,
+            //    CreatedAt = DateTime.UtcNow,
+            //    UpdatedAt = DateTime.UtcNow,
+            //    Role = "User"
+            //};
             var user = new User
             {
+                UserName = dto.Email,
                 Name = dto.Name,
                 Email = dto.Email,
-                Password = HashPassword(dto.Password),
+                //Password = HashPassword(dto.Password),
                 PhoneNumber = dto.PhoneNumber,
                 UniversityName = dto.UniversityName,
                 IsActive = true,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
-                Role = "User"
+             
             };
+            var result = await _userManager.CreateAsync(user, dto.Password);
+            if (!result.Succeeded)
+            {
+                // Handle errors (e.g., log them, throw an exception, etc.)
+                return null;
+            }
 
-            await _userRepository.AddAsync(user);
-            await _userRepository.SaveAsync();
+          
+            await _userManager.AddToRoleAsync(user, "User");
 
             return GenerateJwtToken(user);
         }
 
         private string GenerateJwtToken(User user) {
-            var claims = new[]
+            var userRoles = _userManager.GetRolesAsync(user).Result;
+            var claims = new List<Claim>
             {
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Role, user.Role),
+           
             new Claim("name", user.Name)
         };
+            foreach (var role in userRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role)); // This is required for [Authorize(Roles = "Admin")]
+            }
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -86,5 +117,6 @@ namespace coworking_space.BAL.Services {
         private bool VerifyPassword(string input, string hashed) {
             return HashPassword(input) == hashed;
         }
+     
     }
 }

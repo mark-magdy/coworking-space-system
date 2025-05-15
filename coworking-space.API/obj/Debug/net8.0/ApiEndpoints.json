@@ -383,7 +383,7 @@
       },
       {
         "Name": "userId",
-        "Type": "System.Int32",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
@@ -397,22 +397,6 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "coworking_space.API.Controllers.UserController",
-    "Method": "CreateUser",
-    "RelativePath": "api/User",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userCreateDto",
-        "Type": "coworking_space.BAL.Dtos.UserDTO.UserCreateDto",
-        "IsRequired": true
-      }
-    ],
     "ReturnTypes": []
   },
   {

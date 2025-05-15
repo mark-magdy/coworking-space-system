@@ -12,7 +12,7 @@ namespace coworking_space.BAL.Interaces
     public interface ITotalReservationsService
     {
         public TotalReservationsReadDto? GetTotalReservations(int id);
-        public ReservationReadDto AddReservation(ReservationCreateDto reservationCreateDto,int id);
+        public ReservationReadDto AddReservation(ReservationCreateDto reservationCreateDto,string userId);
         public Task<TotalReservationsReadDto> MakeTotalReservation(TotalReservationCreateDto totalReservationCreateDto);
         public Task<ReservationReadDto> UpdateReservation(int id, ReservationUpdateDto reservationUpdateDto);
         Task<bool> DeleteTotalReservationAsync(int id);

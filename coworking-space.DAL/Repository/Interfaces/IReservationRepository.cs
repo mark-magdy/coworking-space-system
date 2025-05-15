@@ -10,7 +10,7 @@ namespace coworking_space.DAL.Repository.Interfaces
     public interface IReservationsRepository : IGenericRepository<ReservationOfRoom> {
         public Task<List<ReservationOfRoom?>> GetAllUpcomingReservationsWithRooms();
      
-        Task<List<ReservationOfRoom>> GetUpcomingReservationsWithUserAsync(int roomId);
+        public Task<List<ReservationOfRoom>> GetUpcomingReservationsWithUserAsync(int roomId);
 
 
 

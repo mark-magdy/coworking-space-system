@@ -6,15 +6,19 @@ using System.Text;
 using System.Threading.Tasks;
 using coworking_space.DAL.Data.Models;
 using CO_Working_Space;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace coworking_space.DAL.Data
 {
-    public class Context : DbContext
+    public class Context : IdentityDbContext<User>
     {
         public Context(DbContextOptions<Context> options) : base(options)
         { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+           
             modelBuilder.Entity<Order>()
                 .Property(o => o.Order_Status)
                 .HasConversion<string>();
@@ -36,7 +40,7 @@ namespace coworking_space.DAL.Data
                       .WithOne(t=>t.Payment)
                       .HasForeignKey<Payment>(p => p.TotalReservationsId)
                       .OnDelete(DeleteBehavior.Restrict);
-
+         
 
             //modelBuilder.Entity<ReservationOfRoom>()
             //    .Property(r=>r.PriceTillNow)
@@ -46,7 +50,7 @@ namespace coworking_space.DAL.Data
             //    .HasComputedColumnSql("CASE WHEN CurrentCapacity < Capacity THEN 1 ELSE 0 END", stored: true);
         }
 
-        public  DbSet<User> Users { get; set; }
+       
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Product> Products { get; set; }

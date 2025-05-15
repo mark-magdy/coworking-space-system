@@ -290,3 +290,15 @@ C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\cowo
 C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.API\obj\Debug\net8.0\coworking-space.API.pdb
 C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.API\obj\Debug\net8.0\coworking-space.API.genruntimeconfig.cache
 C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.API\obj\Debug\net8.0\ref\coworking-space.API.dll
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.API\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.API\bin\Debug\net8.0\Microsoft.Bcl.Memory.dll
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.API\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.API\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.API\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.API\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.API\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.API\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.API\bin\Debug\net8.0\Microsoft.Extensions.WebEncoders.dll
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.API\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.API\bin\Debug\net8.0\System.Security.Cryptography.Xml.dll
+C:\Users\kiro3\OneDrive\Desktop\computer eng\coworkingSpace\coworking_space\coworking-space.API\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll

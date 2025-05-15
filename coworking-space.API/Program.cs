@@ -1,4 +1,4 @@
-
+﻿
 using coworking_space.API.MappingProfiles;
 using coworking_space.BAL.Interaces;
 using coworking_space.BAL.Services;
@@ -11,12 +11,14 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using CO_Working_Space;
 //using AutoMapper.Extensions.Microsoft.DependencyInjection;
 namespace coworking_space.API
 
 {
     public class Program {
-        public static void Main(string[] args) {
+        public static async Task Main(string[] args) {
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
@@ -76,29 +78,57 @@ namespace coworking_space.API
             //-----------------------------------------
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-            builder.Services.AddAuthentication(options =>
+            builder.Services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<Context>();
+
+            //builder.Services.AddAuthentication(options =>
+            //{
+            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //})
+            //    .AddJwtBearer(options =>
+            //    {
+            //        var jwtSettings = builder.Configuration.GetSection("Jwt");
+            //        options.TokenValidationParameters = new TokenValidationParameters
+            //        {
+            //            ValidateIssuer = true,
+            //            ValidateAudience = true,
+            //            ValidateLifetime = true,
+            //            ValidateIssuerSigningKey = true,
+            //            ValidIssuer = jwtSettings["Issuer"],
+            //            ValidAudience = jwtSettings["Audience"],
+            //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]))
+            //        };
+            //    });
+
+            builder.Services.AddAuthentication(option =>
             {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-                .AddJwtBearer(options =>
+                option.DefaultAuthenticateScheme = "mahmoud";
+                option.DefaultChallengeScheme = "mahmoud";
+            }).AddJwtBearer("mahmoud", options =>
+            {
+                var securitykeystring = builder.Configuration.GetSection("Jwt:Key").Value;
+                var securtykeyByte = Encoding.ASCII.GetBytes(securitykeystring);
+                SecurityKey securityKey = new SymmetricSecurityKey(securtykeyByte);
+
+                options.TokenValidationParameters = new TokenValidationParameters()
                 {
-                    var jwtSettings = builder.Configuration.GetSection("Jwt");
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = jwtSettings["Issuer"],
-                        ValidAudience = jwtSettings["Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]))
-                    };
-                });
-            builder.Services.AddAuthorization();
+                    IssuerSigningKey = securityKey,
+                    //ValidAudience = "url" ,
+                    //ValidIssuer = "url",
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+           // builder.Services.AddAuthorization();
           
 
             var app = builder.Build();
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                await DbInitializer.SeedRolesAsync(services); // 👈 calls the method to add roles
+            }
             app.UseCors("AllowReactApp");
 
             // Configure the HTTP request pipeline.

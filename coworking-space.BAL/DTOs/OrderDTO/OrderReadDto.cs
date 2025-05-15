@@ -14,7 +14,7 @@ namespace coworking_space.BAL.DTOs.OrderDTO {
         public string OrderDetails { get; set; }
         public bool InOut { get; set; }
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public string? UserName { get; set; }
 
         public List<OrderItemReadDto> OrderItems { get; set; } = new();
