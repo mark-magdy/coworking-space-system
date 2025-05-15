@@ -15,7 +15,7 @@ namespace coworking_space.DAL.Repository.Implementations
                 .Include(u => u.Orders)
                     .ThenInclude(o => o.OrderItems)
                        .ThenInclude(oi => oi.Product)
-                .FirstOrDefaultAsync(u => u.Id == id);
+                .FirstOrDefaultAsync(u => u.Id == id.ToString());
             return user;
         }
         public async Task<User> GetUserWithReservations(int id)
@@ -24,7 +24,7 @@ namespace coworking_space.DAL.Repository.Implementations
                 .Include(u => u.TotalReservations)
                     .ThenInclude(t=>t.Reservations)
                           .ThenInclude(r => r.Rooms)
-                .FirstOrDefaultAsync(u => u.Id == id);
+                .FirstOrDefaultAsync(u => u.Id == id.ToString());
             return user;
         }
         public async Task<User?> GetByEmailAsync(string email) {

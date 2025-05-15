@@ -150,7 +150,7 @@ namespace coworking_space.BAL.Services
             };
         }
 
-        public ReservationReadDto AddReservation(ReservationCreateDto reservationCreateDto, int userId)
+        public ReservationReadDto AddReservation(ReservationCreateDto reservationCreateDto, string userId)
         {
 
             var totalreservation = _reservationRepository.getReservationsByUserId(userId);

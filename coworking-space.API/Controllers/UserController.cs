@@ -35,22 +35,22 @@ namespace coworking_space.API.Controllers
             return Ok(user);
         }
 
-        // POST: api/User
-        [HttpPost] 
-        public async Task<IActionResult> CreateUser([FromBody] UserCreateDto userCreateDto)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            try
-            {
-                var createdUser = await _userService.CreateUserAsync(userCreateDto);
-                return CreatedAtAction(nameof(GetUserById), new { id = createdUser.Id }, createdUser);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest($"Error creating user: {ex.Message}");
-            }
-        }
+        //// POST: api/User
+        //[HttpPost] 
+        //public async Task<IActionResult> CreateUser([FromBody] UserCreateDto userCreateDto)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return BadRequest(ModelState);
+        //    try
+        //    {
+        //        var createdUser = await _userService.CreateUserAsync(userCreateDto);
+        //        return CreatedAtAction(nameof(GetUserById), new { id = createdUser.Id }, createdUser);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest($"Error creating user: {ex.Message}");
+        //    }
+        //}
 
         // PUT: api/User/{id}
         [HttpPut("{id}")]

@@ -1,5 +1,6 @@
 ﻿using coworking_space.BAL.DTOs.ProductDTO;
 using coworking_space.BAL.Interaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,6 +34,7 @@ namespace coworking_space.API.Controllers {
             // Just stubbed here, implement based on your use case
             return Ok();
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet("all")]
         public async Task<IActionResult> GetProducts()
         {

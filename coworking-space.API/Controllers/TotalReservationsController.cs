@@ -67,7 +67,7 @@ namespace coworking_space.API.Controllers
         }
 
         [HttpPost("{userId}")] //need to be asynchronous
-        public IActionResult AddReservation([FromBody] ReservationCreateDto dto, int userId)
+        public IActionResult AddReservation([FromBody] ReservationCreateDto dto, string userId)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

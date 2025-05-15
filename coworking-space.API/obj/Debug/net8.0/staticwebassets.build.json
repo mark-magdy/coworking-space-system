@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "xtWW1PMZbC4RvYZidkjFb88qfoy3RZTdRGKdys5G0xM=",
+  "Hash": "L2LXnc65B72yi6Im0NwN7e66w7xPYrS/7HW5A2Td99s=",
   "Source": "coworking-space.API",
   "BasePath": "_content/coworking-space.API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

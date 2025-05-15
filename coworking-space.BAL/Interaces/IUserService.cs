@@ -11,7 +11,7 @@ namespace coworking_space.BAL.Interaces
     {
         Task<List<UserReadDto>> GetAllUsersAsync();
         Task<UserReadDto?> GetUserByIdAsync(int id);
-        Task<UserReadDto> CreateUserAsync(UserCreateDto userCreateDto);
+     //   Task<UserReadDto> CreateUserAsync(UserCreateDto userCreateDto);
         Task<UserReadDto?> UpdateUserAsync(int id, UserUpdateDto userUpdateDto);
         Task<bool> DeleteUserAsync(int id);
         Task<List<OrderReadDto>> GetOrdersByUserId(int id);
