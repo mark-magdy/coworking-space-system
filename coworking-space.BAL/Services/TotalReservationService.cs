@@ -1,4 +1,5 @@
 ﻿using coworking_space.BAL.Dtos.TotalReservationsDTo;
+using coworking_space.BAL.DTOs.TotalReservationsDTo;
 using coworking_space.BAL.Interaces;
 using coworking_space.DAL.Data.Models;
 using coworking_space.DAL.Repository.Interfaces;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using System.Formats.Asn1;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +20,7 @@ namespace coworking_space.BAL.Services
         private readonly ITotalReservationsRepository _reservationRepository;
         private readonly IRoomRepository _roomRepository;
         private readonly IReservationsRepository _reserveRepo;
+
 
         const decimal pricePerHourShared = 10; // Example price per hour
         public TotalReservationService(ITotalReservationsRepository reservationRepository, IRoomRepository roomRepository, IReservationsRepository reservrepo)
@@ -35,7 +38,7 @@ namespace coworking_space.BAL.Services
                 return new List<TotalReservationsReadDto>();
             }
             //the paid total reservations are not included in the list of total reservations
-            return totalReservations.Select(tr =>GetTotalReservations(tr.Id) ).ToList();//this for not paid total reservations
+            return totalReservations.Select(tr => GetTotalReservations(tr.Id)).ToList();//this for not paid total reservations
         }
         public TotalReservationsReadDto? GetTotalReservations(int id)//calculation of the current total reservation 
         {
@@ -56,12 +59,12 @@ namespace coworking_space.BAL.Services
             foreach (var reservation in totalReservation.Reservations)
             {
 
-                if (reservation.Status==Status.Completed) //ended but not paid 
+                if (reservation.Status == Status.Completed) //ended but not paid 
                 {
                     reservation.PriceTillNow = reservation.TotalPrice;
                     totalPrice += reservation.TotalPrice;
                 }
-                else if(reservation.Status==Status.Pending)
+                else if (reservation.Status == Status.Pending)
                 {
                     decimal price = 0;
                     if (reservation.IsPrivate)
@@ -147,10 +150,28 @@ namespace coworking_space.BAL.Services
             };
         }
 
-        public ReservationReadDto AddReservation(ReservationCreateDto reservationCreateDto, int id)
+        public ReservationReadDto AddReservation(ReservationCreateDto reservationCreateDto, string userId)
         {
-            var totalreservation = _reservationRepository.getReservationsByid(id);
-            if (totalreservation.Reservations.Any())
+
+            var totalreservation = _reservationRepository.getReservationsByUserId(userId);
+            if (totalreservation == null || reservationCreateDto.StartDate.Date != DateTime.Today)
+            {
+                TotalReservationsReadDto totalReservationDto = MakeTotalReservation(new TotalReservationCreateDto
+                {
+                    UserId = userId,
+
+                }).Result;
+                totalreservation = new TotalReservations
+                {
+                    Id = totalReservationDto.Id,
+                    UserId = userId,
+                    Description = totalReservationDto.description,
+                    Price = 0,
+                    StartDate = reservationCreateDto.StartDate,
+                };
+
+            }
+            if (totalreservation.Reservations != null)
             {
                 foreach (var res in totalreservation.Reservations)
                 {
@@ -160,9 +181,11 @@ namespace coworking_space.BAL.Services
                     }
                 }
             }
+
+
             var reservation = new ReservationOfRoom
             {
-                StartDate = DateTime.Now, // Set to current date/time
+                StartDate = reservationCreateDto.StartDate, // Set to current date/time
 
 
                 Status = Status.Pending, // Set to a default status
@@ -186,7 +209,8 @@ namespace coworking_space.BAL.Services
 
                 _roomRepository.Update(room);
                 reservation.Rooms = room;
-                _reservationRepository.AddReservation(reservation, id);
+                _reservationRepository.AddReservation(reservation, totalreservation.Id);
+                _reservationRepository.SaveAsync();
                 return new ReservationReadDto
                 {
                     Id = reservation.Id,
@@ -220,7 +244,7 @@ namespace coworking_space.BAL.Services
                 Id = createdTotalReservation.Id,
                 description = createdTotalReservation.Description,
                 totalPrice = createdTotalReservation.Price,
-              
+
             };
 
         }
@@ -311,7 +335,7 @@ namespace coworking_space.BAL.Services
             _reserveRepo.Update(reservation);
             await _reserveRepo.SaveAsync();
 
-            var ret= new ReservationReadDto
+            var ret = new ReservationReadDto
             {
                 Id = reservation.Id,
                 StartDate = reservation.StartDate,
@@ -361,7 +385,62 @@ namespace coworking_space.BAL.Services
             return true;
         }
 
+        public async Task<List<UpcomingReservationReadIDDto>> GetUpcomingReservationsAsync(int roomId)
+        {
+            var reservations = await _reserveRepo.GetUpcomingReservationsWithUserAsync(roomId);
+            if (reservations == null || !reservations.Any())
+            {
+                return null;
+            }
+
+            return reservations.Select(r => new UpcomingReservationReadIDDto
+            {
+                UserName = r.TotalReservations.user.Name,
+                StartDate = r.StartDate,
+                EndDate = r.EndDate.HasValue ? r.EndDate.Value : default(DateTime)
+
+            }).ToList();
+        }
+
+
+
+        public async Task<List<UpcomingReservationReadDto>> GetllUpcomingReservations()
+        {
+            var upcomingReservations = await _reserveRepo.GetAllUpcomingReservationsWithRooms();
+            if (upcomingReservations == null || !upcomingReservations.Any())
+            {
+                return null;
+            }
+
+
+            //the paid total reservations are not included in the list of total reservations
+
+            return upcomingReservations.Select(tr => new UpcomingReservationReadDto
+            {
+                Id = tr.Id,
+                StartDate = tr.StartDate,
+                EndDate = tr.EndDate.HasValue ? tr.EndDate.Value : default(DateTime),
+                Notes = tr.Notes,
+             
+                Rooms = new RoomReadReservationDto
+                {
+                    Id = tr.Rooms.ID,
+                    Name = tr.Rooms.Name,
+                    Description = tr.Rooms.Description
+                },
+                Users = new UserUpcomingReservationReadDto
+                {
+                    Id = tr.TotalReservations.user.Id,
+                    Name = tr.TotalReservations.user.Name,
+                    Email = tr.TotalReservations.user.Email,
+                    PhoneNumber = tr.TotalReservations.user.PhoneNumber,
+                   
+                }
+            }).ToList();
+        }
     }
+      
+
 }
 
 

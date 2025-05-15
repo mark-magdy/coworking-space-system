@@ -36,4 +36,12 @@ namespace coworking_space.BAL.Dtos.TotalReservationsDTo
         public string Name { get; set; }
         public string Description { get; set; }
     }
+    public class UpcomingReservationReadIDDto
+    {
+        public string UserName { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        
+
+    }
 }

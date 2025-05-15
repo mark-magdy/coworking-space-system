@@ -7,9 +7,16 @@ using System.Threading.Tasks;
 
 namespace coworking_space.DAL.Repository.Interfaces
 {
-    public interface ITotalReservationsRepository : IGenericRepository<TotalReservations> {
+    public interface ITotalReservationsRepository : IGenericRepository<TotalReservations>
+    {
         public TotalReservations getReservationsByid(int id);
-        public void AddReservation(ReservationOfRoom reservation,int id);
+
+        public void AddReservation(ReservationOfRoom reservation, int id);
+        Task<TotalReservations?> GetByIdWithReservationsAsync(int id);
+
+        public TotalReservations getReservationsByUserId(string userId);
+      
        
+
     }
 }

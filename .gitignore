@@ -1,23 +1,69 @@
-.vs
-# Visual Studio
+## Build results
+bin/
+obj/
+[Bb]uild/
+[Bb]uild[Ll]og.*
+*.dbmdl
+
+## Rider project files
+.idea/
+
+## VS Code
+.vscode/
+
+## Visual Studio
 .vs/
 *.user
 *.suo
+*.userosscache
+*.sln.docstates
 
-# Build artifacts
-**/bin/
-**/obj/
-**/Debug/
-*.dll
-*.exe
+## ASP.NET Core
+wwwroot/dist/
+wwwroot/node_modules/
 
-# Logs
+## Node
+node_modules/
+
+## Logs
 *.log
+logs/
+*.tlog
 
-# Sensitive files
-# appsettings.json
-# appsettings.Development.json
+## Temporary files
+*.tmp
+*.temp
+*.bak
+*.old
 
-# IDE settings
-.vscode/
-*.csproj.user
+## DotCover
+*.dotCover
+
+## NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+
+## Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+## Test results
+TestResults/
+*.trx
+
+## Publish results
+publish/
+
+## Docker artifacts
+*.container
+*.dockerfile
+
+## Others
+.DS_Store
+Thumbs.db
+
+## Mac system files
+ehthumbs.db

@@ -21,7 +21,10 @@ namespace coworking_space.BAL.Services
         private readonly IOrderService _orderService;
 
 
-        public UserService(IUserRepository userRepository, ITotalReservationsService totalReservationsService, IOrderService orderService)
+
+        public UserService(IUserRepository userRepository, ITotalReservationsService totalReservationsService,IOrderService orderService)
+
+
         {
             _userRepository = userRepository;
             _totalReservationsService = totalReservationsService;
@@ -39,7 +42,7 @@ namespace coworking_space.BAL.Services
                 PhoneNumber = u.PhoneNumber,
                 UniversityName = u.UniversityName,
                 IsActive = u.IsActive,
-                Role = u.Role
+                //Role = u.Role
             }).ToList();
         }
 
@@ -56,40 +59,40 @@ namespace coworking_space.BAL.Services
                 PhoneNumber = user.PhoneNumber,
                 UniversityName = user.UniversityName,
                 IsActive = user.IsActive,
-                Role = user.Role
+                //Role = user.Role
             };
         }
 
-        public async Task<UserReadDto> CreateUserAsync(UserCreateDto userCreateDto)
-        {
-            var user = new User
-            {
-                Name = userCreateDto.Name,
-                Email = userCreateDto.Email,
-                Password = userCreateDto.Password,
-                PhoneNumber = userCreateDto.PhoneNumber,
-                UniversityName = userCreateDto.UniversityName,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
+        //public async Task<UserReadDto> CreateUserAsync(UserCreateDto userCreateDto)
+        //{
+        //    var user = new User
+        //    {
+        //        Name = userCreateDto.Name,
+        //        Email = userCreateDto.Email,
+        //        Password = userCreateDto.Password,
+        //        PhoneNumber = userCreateDto.PhoneNumber,
+        //        UniversityName = userCreateDto.UniversityName,
+        //        CreatedAt = DateTime.Now,
+        //        UpdatedAt = DateTime.Now,
 
-                IsActive = true,
-                Role = "User"
-            };
+        //        IsActive = true,
+        //        Role = "User"
+        //    };
 
-            var createdUser = await _userRepository.AddAsync(user);
-            await _userRepository.SaveAsync();
+        //    var createdUser = await _userRepository.AddAsync(user);
+        //    await _userRepository.SaveAsync();
 
-            return new UserReadDto
-            {
-                Id = createdUser.Id,
-                Name = createdUser.Name,
-                Email = createdUser.Email,
-                PhoneNumber = createdUser.PhoneNumber,
-                UniversityName = createdUser.UniversityName,
-                IsActive = createdUser.IsActive,
-                Role = createdUser.Role
-            };
-        }
+        //    return new UserReadDto
+        //    {
+        //        Id = createdUser.Id,
+        //        Name = createdUser.Name,
+        //        Email = createdUser.Email,
+        //        PhoneNumber = createdUser.PhoneNumber,
+        //        UniversityName = createdUser.UniversityName,
+        //        IsActive = createdUser.IsActive,
+        //        Role = createdUser.Role
+        //    };
+        //}
 
         public async Task<UserReadDto?> UpdateUserAsync(int id, UserUpdateDto userUpdateDto)
         {
@@ -113,7 +116,7 @@ namespace coworking_space.BAL.Services
                 PhoneNumber = user.PhoneNumber,
                 UniversityName = user.UniversityName,
                 IsActive = user.IsActive,
-                Role = user.Role
+              //  Role = user.Role
             };
         }
 

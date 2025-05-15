@@ -1,5 +1,6 @@
 ﻿using coworking_space.BAL.Dtos.TotalReservationsDTo;
 using coworking_space.BAL.Interaces;
+using coworking_space.BAL.Services;
 using coworking_space.DAL.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -65,15 +66,15 @@ namespace coworking_space.API.Controllers
             }
         }
 
-        [HttpPost("{id}")] //need to be asynchronous
-        public IActionResult AddReservation([FromBody] ReservationCreateDto dto, int id)
+        [HttpPost("{userId}")] //need to be asynchronous
+        public IActionResult AddReservation([FromBody] ReservationCreateDto dto, string userId)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                var reservation = _reservationService.AddReservation(dto, id);
+                var reservation = _reservationService.AddReservation(dto, userId);
                 return Created(string.Empty, reservation);
             }
             catch (Exception ex)
@@ -86,25 +87,28 @@ namespace coworking_space.API.Controllers
 
 
         }
-        [HttpPost]
-        public async Task<IActionResult> MakeTotalReservation([FromBody] TotalReservationCreateDto dto)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            try
-            {
-                var totalReservation = await _reservationService.MakeTotalReservation(dto);
-                return Created(string.Empty, totalReservation);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
 
 
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> MakeTotalReservation([FromBody] TotalReservationCreateDto dto)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return BadRequest(ModelState);
+        //    try
+        //    {
+        //        var totalReservation = await _reservationService.MakeTotalReservation(dto);
+        //        return Created(string.Empty, totalReservation);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+
+
+        //}
+
         [HttpPut("{id}")] //total reservation id 
-        public async Task< IActionResult> UpdateReservation(int id, [FromBody] ReservationUpdateDto dto)
+        public async Task<IActionResult> UpdateReservation(int id, [FromBody] ReservationUpdateDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -153,5 +157,67 @@ namespace coworking_space.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+
+        [HttpGet("{roomId}/upcoming-reservations")]
+        public async Task<IActionResult> GetUpcomingReservations(int roomId)
+        {
+            try
+            {
+                var reservations = await _reservationService.GetUpcomingReservationsAsync(roomId);
+
+                if (reservations == null || !reservations.Any())
+                {
+                    return NotFound($"No upcoming reservations found for room ID {roomId}.");
+                }
+
+                return Ok(reservations);
+            }
+            catch (Exception ex)
+            {
+                // Optionally log the exception
+                return StatusCode(500, $"An error occurred while retrieving reservations: {ex.Message}");
+            }
+        }
+
+        //[HttpGet("/upcoming")]
+        //public async Task<IActionResult> GetAllUpcomingReservations()
+        //{
+        //    try
+        //    {
+        //        var upcomingReservations = await _reservationService.GetAllTotalReservationsAsync();
+        //        if (totalReservations == null || !totalReservations.Any())
+        //        {
+        //            return NotFound("No total reservations found.");
+        //        }
+        //        return Ok(upcomingReservations);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+
+        //}
+
+
+        [HttpGet("/upcoming")]
+        public async Task<IActionResult> GetAllUpcomingReservations()
+        {
+            try
+            {
+                var upcomingReservations = await _reservationService.GetllUpcomingReservations();
+                if (upcomingReservations == null )
+                {
+                    return NotFound("No Upcoming Reservations.");
+                }
+                return Ok(upcomingReservations);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
     }
 }

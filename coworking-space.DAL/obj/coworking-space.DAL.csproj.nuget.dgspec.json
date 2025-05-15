@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\courses\\DEPI Web\\gradProject\\coworking-space-system\\coworking-space.DAL\\coworking-space.DAL.csproj": {}
+    "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\coworkingSpace\\coworking_space\\coworking-space.DAL\\coworking-space.DAL.csproj": {}
   },
   "projects": {
-    "D:\\courses\\DEPI Web\\gradProject\\coworking-space-system\\coworking-space.DAL\\coworking-space.DAL.csproj": {
+    "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\coworkingSpace\\coworking_space\\coworking-space.DAL\\coworking-space.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\courses\\DEPI Web\\gradProject\\coworking-space-system\\coworking-space.DAL\\coworking-space.DAL.csproj",
+        "projectUniqueName": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\coworkingSpace\\coworking_space\\coworking-space.DAL\\coworking-space.DAL.csproj",
         "projectName": "coworking-space.DAL",
-        "projectPath": "D:\\courses\\DEPI Web\\gradProject\\coworking-space-system\\coworking-space.DAL\\coworking-space.DAL.csproj",
-        "packagesPath": "C:\\Users\\marka\\.nuget\\packages\\",
-        "outputPath": "D:\\courses\\DEPI Web\\gradProject\\coworking-space-system\\coworking-space.DAL\\obj\\",
+        "projectPath": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\coworkingSpace\\coworking_space\\coworking-space.DAL\\coworking-space.DAL.csproj",
+        "packagesPath": "C:\\Users\\kiro3\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kiro3\\OneDrive\\Desktop\\computer eng\\coworkingSpace\\coworking_space\\coworking-space.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\marka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kiro3\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -50,6 +50,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.3.1, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.0, )"

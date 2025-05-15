@@ -20,6 +20,12 @@ namespace coworking_space.DAL.Repository.Implementations
            .ThenInclude(r => r.Rooms)
        .FirstOrDefault(tr => tr.Id == id);
         }
+        public async Task<TotalReservations?> GetByIdWithReservationsAsync(int id)
+        {
+            return await _context.TotalReservations
+                .Include(tr => tr.Reservations)
+                .FirstOrDefaultAsync(tr => tr.Id == id);
+        }
         public void AddReservation(ReservationOfRoom reservation, int id)
         {
             var totalReservation = _context.TotalReservations
@@ -36,6 +42,14 @@ namespace coworking_space.DAL.Repository.Implementations
             }
 
         }
+        public TotalReservations getReservationsByUserId(string userId)//return active reservations of today which is not paid
+        {
+            return _context.TotalReservations.Where(tr => tr.UserId == userId&&tr.Status == Status.Pending&&tr.StartDate.Date==DateTime.Today)
+                .Include(tr => tr.Reservations)
+                    .ThenInclude(r => r.Rooms)
+                .FirstOrDefault();
 
+        }
+      
     }
 }

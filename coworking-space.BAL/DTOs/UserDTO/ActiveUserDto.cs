@@ -8,7 +8,7 @@ namespace coworking_space.BAL.DTOs.UserDTO
 {
     public class ActiveUserDto
     {
-        public int  id { get; set; }
+        public string  id { get; set; }
         public string user { get; set; }
         public string space { get; set; }
         public DateTime date { get; set; }
@@ -17,6 +17,7 @@ namespace coworking_space.BAL.DTOs.UserDTO
         public decimal ?orders { get; set; }
      
         public decimal total { get; set; }
+    
     }
 //    id: 3,
 //      user: 'Michael Brown',

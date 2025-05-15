@@ -111,6 +111,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "coworking_space.API.PaymentController",
+    "Method": "CreatePayment",
+    "RelativePath": "api/Payment/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "coworking_space.BAL.DTOs.PaymentDTO.CreatPaymentDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "coworking_space.API.Controllers.ProductsController",
     "Method": "AddProduct",
     "RelativePath": "api/Products",
@@ -243,49 +259,12 @@
   },
   {
     "ContainingType": "coworking_space.API.Controllers.TotalReservationsController",
-    "Method": "MakeTotalReservation",
-    "RelativePath": "api/TotalReservations",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "coworking_space.BAL.Dtos.TotalReservationsDTo.TotalReservationCreateDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "coworking_space.API.Controllers.TotalReservationsController",
     "Method": "GetTotalReservation",
     "RelativePath": "api/TotalReservations/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "coworking_space.API.Controllers.TotalReservationsController",
-    "Method": "AddReservation",
-    "RelativePath": "api/TotalReservations/{id}",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "coworking_space.BAL.Dtos.TotalReservationsDTo.ReservationCreateDto",
-        "IsRequired": true
-      },
       {
         "Name": "id",
         "Type": "System.Int32",
@@ -325,6 +304,22 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "coworking_space.API.Controllers.TotalReservationsController",
+    "Method": "GetUpcomingReservations",
+    "RelativePath": "api/TotalReservations/{roomId}/upcoming-reservations",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -374,6 +369,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "coworking_space.API.Controllers.TotalReservationsController",
+    "Method": "AddReservation",
+    "RelativePath": "api/TotalReservations/{userId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "coworking_space.BAL.Dtos.TotalReservationsDTo.ReservationCreateDto",
+        "IsRequired": true
+      },
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "coworking_space.API.Controllers.UserController",
     "Method": "GetAllUsers",
     "RelativePath": "api/User",
@@ -381,22 +397,6 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "coworking_space.API.Controllers.UserController",
-    "Method": "CreateUser",
-    "RelativePath": "api/User",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userCreateDto",
-        "Type": "coworking_space.BAL.Dtos.UserDTO.UserCreateDto",
-        "IsRequired": true
-      }
-    ],
     "ReturnTypes": []
   },
   {
@@ -492,6 +492,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "coworking_space.API.Controllers.TotalReservationsController",
+    "Method": "GetAllUpcomingReservations",
+    "RelativePath": "upcoming",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]

@@ -26,7 +26,7 @@ namespace coworking_space.DAL.Data.Models
         // navigation property 
         public virtual ICollection<ReservationOfRoom>? Reservations { get; set; }//total price is calculated from each reservation
         public User user { get; set; }  
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public virtual Payment? Payment { get; set; }
 
 
