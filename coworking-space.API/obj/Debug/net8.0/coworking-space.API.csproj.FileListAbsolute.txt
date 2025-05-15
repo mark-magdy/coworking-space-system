@@ -147,7 +147,6 @@ D:\courses\DEPI Web\gradProject\coworking-space-system\coworking-space.API\obj\D
 D:\courses\DEPI Web\gradProject\coworking-space-system\coworking-space.API\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.coworking-space.API.props
 D:\courses\DEPI Web\gradProject\coworking-space-system\coworking-space.API\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.coworking-space.API.props
 D:\courses\DEPI Web\gradProject\coworking-space-system\coworking-space.API\obj\Debug\net8.0\staticwebassets.pack.json
-D:\courses\DEPI Web\gradProject\coworking-space-system\coworking-space.API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\courses\DEPI Web\gradProject\coworking-space-system\coworking-space.API\obj\Debug\net8.0\coworkin.DCCFF300.Up2Date
 D:\courses\DEPI Web\gradProject\coworking-space-system\coworking-space.API\obj\Debug\net8.0\coworking-space.API.dll
 D:\courses\DEPI Web\gradProject\coworking-space-system\coworking-space.API\obj\Debug\net8.0\refint\coworking-space.API.dll
@@ -438,3 +437,5 @@ C:\Users\kiro3\OneDrive\Desktop\computer eng\coworking_space\coworking-space.API
 C:\Users\kiro3\OneDrive\Desktop\computer eng\coworking_space\coworking-space.API\obj\Debug\net8.0\coworking-space.API.pdb
 C:\Users\kiro3\OneDrive\Desktop\computer eng\coworking_space\coworking-space.API\obj\Debug\net8.0\coworking-space.API.genruntimeconfig.cache
 C:\Users\kiro3\OneDrive\Desktop\computer eng\coworking_space\coworking-space.API\obj\Debug\net8.0\ref\coworking-space.API.dll
+D:\courses\DEPI Web\gradProject\coworking-space-system\coworking-space.API\bin\Debug\net8.0\AutoMapper.dll
+D:\courses\DEPI Web\gradProject\coworking-space-system\coworking-space.API\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
