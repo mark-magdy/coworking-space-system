@@ -14,8 +14,8 @@ namespace coworking_space.BAL.Interaces
      //   Task<UserReadDto> CreateUserAsync(UserCreateDto userCreateDto);
         Task<UserReadDto?> UpdateUserAsync(int id, UserUpdateDto userUpdateDto);
         Task<bool> DeleteUserAsync(int id);
-        Task<List<OrderReadDto>> GetOrdersByUserId(int id);
-        Task<List<TotalReservationsReadDto>> GetReservationsByUserId(int id);
+        Task<List<OrderReadDto>> GetOrdersByUserId(string id);
+        Task<List<TotalReservationsReadDto>> GetReservationsByUserId(string id);
 
         Task<List<ActiveUserDto>> GetAllactiveUsers();
     }

@@ -129,7 +129,7 @@ namespace coworking_space.BAL.Services
             await _userRepository.SaveAsync();
             return true;
         }
-        public async Task<List<OrderReadDto>> GetOrdersByUserId(int id)
+        public async Task<List<OrderReadDto>> GetOrdersByUserId(string id)
         {
             var user = await _userRepository.GetUserWithOrders(id);
             if (user == null) return null;
@@ -143,7 +143,7 @@ namespace coworking_space.BAL.Services
             }
             return orders;
         }
-        public async Task<List<TotalReservationsReadDto>> GetReservationsByUserId(int id)
+        public async Task<List<TotalReservationsReadDto>> GetReservationsByUserId(string id)
         {
             var user = await _userRepository.GetUserWithReservations(id);
             if (user == null) return null;
