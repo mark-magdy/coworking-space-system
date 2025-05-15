@@ -112,6 +112,22 @@
   },
   {
     "ContainingType": "coworking_space.API.PaymentController",
+    "Method": "CreateBulkPayment",
+    "RelativePath": "api/Payment/bulk-create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "coworking_space.BAL.DTOs.PaymentDTO.CreateBulkPaymentDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "coworking_space.API.PaymentController",
     "Method": "CreatePayment",
     "RelativePath": "api/Payment/create",
     "HttpMethod": "POST",
@@ -122,6 +138,53 @@
         "Name": "dto",
         "Type": "coworking_space.BAL.DTOs.PaymentDTO.CreatPaymentDTO",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "coworking_space.API.PaymentController",
+    "Method": "GetMonthlyRevenue",
+    "RelativePath": "api/Payment/revenue",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "month",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "year",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "coworking_space.API.PaymentController",
+    "Method": "GetDailyRevenue",
+    "RelativePath": "api/Payment/revenue/daily",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "day",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "month",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "year",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
