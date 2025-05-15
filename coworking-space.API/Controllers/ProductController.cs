@@ -34,7 +34,7 @@ namespace coworking_space.API.Controllers {
             // Just stubbed here, implement based on your use case
             return Ok();
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet("all")]
         public async Task<IActionResult> GetProducts()
         {
