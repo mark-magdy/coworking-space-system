@@ -9,22 +9,22 @@ namespace coworking_space.DAL.Repository.Implementations
     public class UserRepository : GenericRepository<User>, IUserRepository
     {
         public UserRepository(Context context) : base(context) { }
-        public async Task<User> GetUserWithOrders(int id)
+        public async Task<User> GetUserWithOrders(string id)
         {
             var user = await _context.Users
                 .Include(u => u.Orders)
                     .ThenInclude(o => o.OrderItems)
                        .ThenInclude(oi => oi.Product)
-                .FirstOrDefaultAsync(u => u.Id == id.ToString());
+                .FirstOrDefaultAsync(u => u.Id == id);
             return user;
         }
-        public async Task<User> GetUserWithReservations(int id)
+        public async Task<User> GetUserWithReservations(string id)
         {
             var user = await _context.Users
                 .Include(u => u.TotalReservations)
                     .ThenInclude(t=>t.Reservations)
                           .ThenInclude(r => r.Rooms)
-                .FirstOrDefaultAsync(u => u.Id == id.ToString());
+                .FirstOrDefaultAsync(u => u.Id == id);
             return user;
         }
         public async Task<User?> GetByEmailAsync(string email) {

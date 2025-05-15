@@ -77,7 +77,7 @@ namespace coworking_space.API.Controllers
             return NoContent();
         }
         [HttpGet("orders/{id}")]//get orders of user by id
-        public async Task<IActionResult> GetOrdersByUserId(int id)
+        public async Task<IActionResult> GetOrdersByUserId(string id)
         {
             var orders = await _userService.GetOrdersByUserId(id);
             if (orders == null)
@@ -85,7 +85,7 @@ namespace coworking_space.API.Controllers
             return Ok(orders);
         }
         [HttpGet("reservations/{id}")]//get reservations of user by id
-        public async Task<IActionResult> GetReservationsByUserId(int id)
+        public async Task<IActionResult> GetReservationsByUserId(string id)
         {
             var reservations = await _userService.GetReservationsByUserId(id);
             if (reservations == null)
