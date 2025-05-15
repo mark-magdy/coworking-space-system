@@ -26,7 +26,7 @@ namespace coworking_space.API.Controllers
                 var totalReservations = await _reservationService.GetAllTotalReservationsAsync();
                 if (totalReservations == null || !totalReservations.Any())
                 {
-                    return NotFound("No total reservations found.");
+                    return Ok(new List<TotalReservationsReadDto>());
                 }
                 return Ok(totalReservations);
             }
