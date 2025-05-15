@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "xtWW1PMZbC4RvYZidkjFb88qfoy3RZTdRGKdys5G0xM=",
+  "Source": "coworking-space.API",
+  "BasePath": "_content/coworking-space.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

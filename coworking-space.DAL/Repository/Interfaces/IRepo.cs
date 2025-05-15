@@ -20,7 +20,7 @@ namespace coworking_space.DAL.Repository.Interfaces {
     }
 
     // Interfaces/IPaymentRepository.cs
-    public interface IPaymentRepository : IGenericRepository<Payment> { }
+    //public interface IPaymentRepository : IGenericRepository<Payment> { }
 
     // Interfaces/IPurchasedItemRepository.cs
     //public interface IPurchasedItemRepository : IGenericRepository<PurchasedItem> { }

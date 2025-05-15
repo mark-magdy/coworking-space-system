@@ -12,6 +12,10 @@ namespace coworking_space.BAL.Interaces
     {
 
         Task ProcessPaymentAsync(CreatPaymentDTO dto);
+        Task ProcessBulkPaymentAsync(CreateBulkPaymentDTO dto);
+        Task<decimal> GetMonthlyRevenueAsync(int month, int year);
+        Task<decimal> GetDailyRevenueAsync(int day, int month, int year);
+
 
     }
 }
