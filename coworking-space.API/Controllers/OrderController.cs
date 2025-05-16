@@ -1,5 +1,6 @@
 ﻿using coworking_space.BAL.DTOs.OrderDTO;
 using coworking_space.BAL.Interaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata.Ecma335;
 
@@ -8,6 +9,7 @@ using System.Reflection.Metadata.Ecma335;
 namespace coworking_space.API.Controllers {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class OrderController : ControllerBase {
         private readonly IOrderService _orderService;
         public OrderController(IOrderService orderService) {

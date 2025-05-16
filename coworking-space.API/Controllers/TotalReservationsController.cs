@@ -2,6 +2,7 @@
 using coworking_space.BAL.Interaces;
 using coworking_space.BAL.Services;
 using coworking_space.DAL.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace coworking_space.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TotalReservationsController : ControllerBase
     {
         private readonly ITotalReservationsService _reservationService;

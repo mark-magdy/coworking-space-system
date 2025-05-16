@@ -5,11 +5,13 @@ using coworking_space.BAL.Dtos.UserDTO;
 using System.Threading.Tasks;
 using coworking_space.BAL.Dtos.TotalReservationsDTo;
 using coworking_space.BAL.DTOs.OrderDTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace coworking_space.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -20,6 +22,7 @@ namespace coworking_space.API.Controllers
         }
 
         // GET: api/User
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
         {
