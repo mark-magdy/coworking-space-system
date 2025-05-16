@@ -46,9 +46,9 @@ namespace coworking_space.BAL.Services
             }).ToList();
         }
 
-        public async Task<UserReadDto?> GetUserByIdAsync(int id)
+        public async Task<UserReadDto?> GetUserByIdAsync(string id)
         {
-            var user = await _userRepository.GetByIdAsync(id);
+            var user = await _userRepository.GetUserByIdAsync(id);
             if (user == null) return null;
 
             return new UserReadDto

@@ -41,5 +41,7 @@ namespace coworking_space.DAL.Repository.Implementations
                 .ToListAsync();
             return users;
         }
+        public  async Task<User> GetUserByIdAsync(string id) => await _dbSet.FindAsync(id);
+
     }
 }

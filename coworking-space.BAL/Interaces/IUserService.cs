@@ -10,7 +10,7 @@ namespace coworking_space.BAL.Interaces
     public interface IUserService
     {
         Task<List<UserReadDto>> GetAllUsersAsync();
-        Task<UserReadDto?> GetUserByIdAsync(int id);
+        Task<UserReadDto?> GetUserByIdAsync(string id);
      //   Task<UserReadDto> CreateUserAsync(UserCreateDto userCreateDto);
         Task<UserReadDto?> UpdateUserAsync(int id, UserUpdateDto userUpdateDto);
         Task<bool> DeleteUserAsync(int id);

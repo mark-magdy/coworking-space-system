@@ -9,5 +9,7 @@ namespace coworking_space.DAL.Repository.Interfaces
         public Task<User> GetUserWithOrders(string id);
         public Task<User> GetUserWithReservations(string id);
         Task<List<User>> GetAllActiveUsers();
+        public Task<User> GetUserByIdAsync(string id);
+
     }
 }
