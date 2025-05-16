@@ -9,7 +9,7 @@ namespace coworking_space.BAL.Dtos.TotalReservationsDTo
 {
     public class ReservationUpdateDto
     {
-        public int Id { get; set; }
+        public int ?Id { get; set; }
         public DateTime? StartDate { get; set; }
        
         public Status? Status { get; set; } // e.g., "Pending", "Confirmed", "Cancelled"
