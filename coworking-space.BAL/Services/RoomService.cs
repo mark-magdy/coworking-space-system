@@ -77,6 +77,7 @@ namespace coworking_space.BAL.Services {
             };
 
             var createdRoom = await _roomRepository.AddAsync(room);
+            await _roomRepository.SaveAsync();
 
             // Return mapped DTO
             return new RoomReadDto
@@ -112,7 +113,8 @@ namespace coworking_space.BAL.Services {
             room.Capacity = roomUpdateDto.Capacity;
             room.CurrentCapacity = roomUpdateDto.CurrentCapacity;
             room.ImageUrl = roomUpdateDto.ImageUrl;
-            _roomRepository.Update(room);
+             _roomRepository.Update(room);
+            await _roomRepository.SaveAsync();
             return new RoomReadDto
             {
                 ID = room.ID,

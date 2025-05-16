@@ -15,7 +15,7 @@ namespace coworking_space.API.Controllers {
         //GET: api/<RoomController>
         [HttpGet]
         public async Task<IActionResult> Get() {
-            return Ok(_roomService.GetAllRooms());
+            return Ok(await _roomService.GetAllRooms());
         }
 
         //GET api/<RoomController>/5

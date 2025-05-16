@@ -3,6 +3,8 @@ using coworking_space.BAL.Dtos.UserDTO;
 
     using coworking_space.BAL.Interaces; // Assuming you have IUserService
 using System.Threading.Tasks;
+using coworking_space.BAL.Dtos.TotalReservationsDTo;
+using coworking_space.BAL.DTOs.OrderDTO;
 
 namespace coworking_space.API.Controllers
 {
@@ -31,7 +33,7 @@ namespace coworking_space.API.Controllers
         {
             var user = await _userService.GetUserByIdAsync(id);
             if (user == null)
-                return NotFound("User not found.");
+                return Ok(new UserReadDto());
             return Ok(user);
         }
 
@@ -81,7 +83,7 @@ namespace coworking_space.API.Controllers
         {
             var orders = await _userService.GetOrdersByUserId(id);
             if (orders == null)
-                return NotFound("Orders not found.");
+                return Ok(new List<OrderReadDto>());
             return Ok(orders);
         }
         [HttpGet("reservations/{id}")]//get reservations of user by id
@@ -89,7 +91,7 @@ namespace coworking_space.API.Controllers
         {
             var reservations = await _userService.GetReservationsByUserId(id);
             if (reservations == null)
-                return NotFound("Reservations not found.");
+                return Ok(new List<ReservationReadDto>());
             return Ok(reservations);
         }
 
@@ -99,7 +101,7 @@ namespace coworking_space.API.Controllers
         {
             var users = await _userService.GetAllactiveUsers();
             if (users == null || users.Count == 0)
-                return NotFound("No active users found.");
+                return Ok(new List<UserReadDto>());
             return Ok(users);
         }
 
