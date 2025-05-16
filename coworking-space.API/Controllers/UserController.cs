@@ -29,7 +29,7 @@ namespace coworking_space.API.Controllers
 
         // GET: api/User/{id}
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUserById(int id)
+        public async Task<IActionResult> GetUserById(string id)
         {
             var user = await _userService.GetUserByIdAsync(id);
             if (user == null)

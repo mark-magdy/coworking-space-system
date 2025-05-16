@@ -117,6 +117,112 @@ namespace coworking_space.BAL.Services
                 throw new InvalidOperationException("An error occurred while processing the payment.", ex);
             }
         }
+
+        public async Task ProcessBulkPaymentAsync(CreateBulkPaymentDTO dto)
+        {
+            if (!dto.PaymentMethod.Equals("Cash", StringComparison.OrdinalIgnoreCase))
+                throw new ArgumentException("Only 'Cash' payments are accepted at this time.");
+
+            if ((dto.OrderIds == null || !dto.OrderIds.Any()) &&
+                (dto.TotalReservationIds == null || !dto.TotalReservationIds.Any()))
+                throw new ArgumentException("At least one OrderId or TotalReservationId must be provided.");
+
+            decimal totalAmount = 0;
+            var orders = new List<Order>();
+            var reservations = new List<TotalReservations>();
+
+            if (dto.OrderIds != null)
+            {
+                foreach (var orderId in dto.OrderIds)
+                {
+                    var order = await _orderRepo.GetByIdAsync(orderId)
+                        ?? throw new ArgumentException($"Order with ID {orderId} not found.");
+
+                    if (order.Order_Status == Status.Completed)
+                        throw new InvalidOperationException($"Order {orderId} is already paid.");
+
+                    totalAmount += order.TotalPrice;
+                    orders.Add(order);
+                }
+            }
+
+            if (dto.TotalReservationIds != null)
+            {
+                foreach (var reservationId in dto.TotalReservationIds)
+                {
+                    var reservation = await _reservationRepo.GetByIdWithReservationsAsync(reservationId)
+                        ?? throw new ArgumentException($"Reservation with ID {reservationId} not found.");
+
+                    if (reservation.Status == Status.Completed)
+                        throw new InvalidOperationException($"Reservation {reservationId} is already paid.");
+
+                    if (reservation.Reservations == null || !reservation.Reservations.Any())
+                        throw new ArgumentException($"No reservations found under TotalReservation {reservationId}.");
+
+                    totalAmount += reservation.Reservations.Sum(r => r.TotalPrice);
+                    reservations.Add(reservation);
+                }
+            }
+
+            if (dto.Amount < totalAmount)
+                throw new ArgumentException($"Insufficient payment. Required: {totalAmount}, Provided: {dto.Amount}");
+
+            var payment = new Payment
+            {
+                PaymentMethod = dto.PaymentMethod,
+                Amount = dto.Amount,
+                PaymentDate = DateTime.Now,
+                PaymentStatus = Status.Completed,
+                PaymentDetails = $"Payment for multiple orders/reservations",
+                PaymentType = "One-time",
+                Currency = "EGP",
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                IsRefunded = false
+            };
+
+            foreach (var order in orders)
+            {
+                order.Order_Status = Status.Completed;
+                _orderRepo.Update(order);
+            }
+
+            foreach (var reservation in reservations)
+            {
+                reservation.Status = Status.Completed;
+                _reservationRepo.Update(reservation);
+
+                var detailedReservation = _reservationRepo.getReservationsByid(reservation.Id);
+                foreach (var res in detailedReservation.Reservations)
+                {
+                    res.Status = Status.Completed;
+                    _resRepository.Update(res);
+                }
+            }
+
+            try
+            {
+                await _paymentRepo.AddAsync(payment);
+                await _orderRepo.SaveAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("An error occurred while processing the bulk payment.", ex);
+            }
+        }
+        public async Task<decimal> GetMonthlyRevenueAsync(int month, int year)
+        {
+            var payments = await _paymentRepo.GetPaymentsByMonthAsync(month, year);
+            return payments.Where(p => p.PaymentStatus == Status.Completed).Sum(p => p.Amount);
+        }
+        public async Task<decimal> GetDailyRevenueAsync(int day, int month, int year)
+        {
+            var payments = await _paymentRepo.GetPaymentsByDayAsync(day, month, year);
+            return payments
+                .Where(p => p.PaymentStatus == Status.Completed)
+                .Sum(p => p.Amount);
+        }
+
     }
 }
 
